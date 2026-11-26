@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gilbert's Academy — Professional SMC Mastery</title>
+<style>
+:root{
+  --bg:#0b0e14; --panel:#111623; --panel2:#161c2d; --border:#232c42;
+  --text:#d7deeb; --muted:#8a94ab; --accent:#26c6a2; --accent2:#e8b73a;
+  --red:#ef5350; --green:#26a69a; --blue:#5b8def;
+  --font:'Segoe UI',system-ui,sans-serif; --mono:'Cascadia Code','Fira Code',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.75}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1150px;margin:0 auto;padding:0 20px}
+
+/* ===== ENGINEERED TOP SECTION ===== */
+header{position:sticky;top:0;z-index:50;background:rgba(13,17,28,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;max-width:1150px;margin:0 auto;gap:14px}
+.logo{font-family:var(--mono);font-size:1.1rem;font-weight:700;white-space:nowrap}
+.logo span{color:var(--accent)}
+.logo small{display:block;font-size:.62rem;color:var(--muted);font-weight:400;letter-spacing:.12em}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+.navlinks a{color:var(--muted);font-size:.88rem;padding:8px 14px;border-radius:8px;transition:.2s}
+.navlinks a:hover{color:var(--accent);background:var(--panel2)}
+.navlinks a.active{color:var(--accent);background:var(--panel2);border:1px solid var(--border)}
+.navright{display:flex;align-items:center;gap:10px}
+#progressWrap{background:var(--panel2);border:1px solid var(--border);border-radius:20px;padding:5px 14px;display:flex;align-items:center;gap:8px}
+#progressPill{font-family:var(--mono);font-size:.78rem;color:var(--accent);white-space:nowrap}
+#progressBarWrap{width:70px;height:5px;background:#0d1120;border-radius:3px;overflow:hidden}
+#progressBar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.4s}
+#streak{font-size:.75rem;color:var(--accent2);font-family:var(--mono)}
+
+.hero{position:relative;padding:80px 20px 60px;text-align:center;overflow:hidden;border-bottom:1px solid var(--border);
+  background:radial-gradient(ellipse at 50% -20%,rgba(38,198,162,.14),transparent 60%),linear-gradient(180deg,#0d1220,var(--bg))}
+.hero::before{content:"";position:absolute;inset:0;background-image:
+  linear-gradient(rgba(35,44,66,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(35,44,66,.35) 1px,transparent 1px);
+  background-size:44px 44px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);pointer-events:none}
+.hero .kicker{font-family:var(--mono);color:var(--accent2);letter-spacing:.25em;font-size:.75rem;text-transform:uppercase}
+.hero h1{font-size:3rem;font-family:var(--mono);margin:14px 0;position:relative}
+.hero h1 b{color:var(--accent)}
+.hero p{color:var(--muted);max-width:680px;margin:0 auto 30px;font-size:1.08rem;position:relative}
+.heroStats{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;margin-bottom:32px;position:relative}
+.heroStats div{font-family:var(--mono)}
+.heroStats b{display:block;font-size:1.5rem;color:var(--accent)}
+.heroStats span{color:var(--muted);font-size:.78rem}
+.mentorStrip{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:36px;position:relative}
+.mentorStrip img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--accent)}
+.mentorStrip .t{text-align:left}
+.mentorStrip b{color:#fff;display:block}
+.mentorStrip small{color:var(--muted)}
+
+
+/* ---------- BUTTONS ---------- */
+.btn{display:inline-block;background:var(--accent);color:#06251d;font-weight:700;
+  padding:14px 34px;border-radius:10px;font-size:1rem;cursor:pointer;border:none;
+  transition:.2s;font-family:var(--mono);letter-spacing:.03em;
+  box-shadow:0 4px 18px rgba(38,198,162,.25)}
+.btn:hover{filter:brightness(1.15);transform:translateY(-2px);
+  box-shadow:0 6px 24px rgba(38,198,162,.35)}
+.btn:active{transform:translateY(0)}
+.btn.ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent);box-shadow:none}
+.btn.ghost:hover{background:rgba(38,198,162,.08);filter:none}
+/* mentor note inside lessons */
+.mentorNote{background:linear-gradient(135deg,#131b2c,#101826);border:1px solid var(--border);border-left:4px solid var(--accent2);
+  border-radius:0 10px 10px 0;padding:14px 18px;margin:22px 0;display:flex;gap:14px;align-items:flex-start}
+.mentorNote img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid var(--accent2);flex-shrink:0}
+.mentorNote .mt small{color:var(--accent2);font-family:var(--mono);font-size:.7rem;letter-spacing:.1em}
+.mentorNote .mt p{color:var(--text);font-size:.92rem;margin-top:2px;font-style:italic}
+
+
+
+/* ---------- VIEWS ---------- */
+.view{display:none;padding:40px 0}
+.view.on{display:block}
+.phases h2{font-family:var(--mono);color:var(--accent2);margin:34px 0 14px;font-size:1.12rem;border-left:4px solid var(--accent2);padding-left:12px}
+.phaseSub{color:var(--muted);font-size:.85rem;margin:-8px 0 14px;padding-left:16px}
+.lessonCard{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:10px;cursor:pointer;transition:.2s}
+.lessonCard:hover{border-color:var(--accent);transform:translateX(4px)}
+.lessonCard .num{font-family:var(--mono);color:var(--muted);font-size:.85rem;min-width:46px}
+.lessonCard .t{flex:1}
+.lessonCard .t small{display:block;color:var(--muted);font-size:.78rem}
+.lessonCard.done{border-color:var(--green)}
+.lessonCard.done .badge{color:var(--green)}
+.lessonCard.locked{opacity:.45}
+.badge{font-size:1.1rem}
+
+/* ---------- ABOUT ---------- */
+.aboutCard{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:34px;max-width:860px;margin:0 auto;text-align:center}
+.aboutCard img#profileImg{width:150px;height:150px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);box-shadow:0 0 0 8px rgba(38,198,162,.1)}
+.aboutCard h2{font-family:var(--mono);margin:16px 0 4px}
+.aboutCard .role{color:var(--accent2);font-family:var(--mono);font-size:.85rem;letter-spacing:.1em}
+.aboutCard p.bio{color:var(--text);text-align:left;margin:22px 0;font-size:.98rem}
+.photoControls{margin-top:18px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.photoControls input[type=text]{background:var(--panel2);border:1px solid var(--border);color:var(--text);padding:9px 14px;border-radius:8px;width:320px;max-width:90%}
+.photoControls button{background:var(--panel2);border:1px solid var(--border);color:var(--accent);padding:8px 18px;border-radius:8px;cursor:pointer;font-family:var(--mono)}
+.cred{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.cred span{background:var(--panel2);border:1px solid var(--border);padding:6px 14px;border-radius:20px;font-size:.8rem;color:var(--muted)}
+
+/* ---------- LESSON ---------- */
+#lessonView{display:none;max-width:840px;margin:0 auto;padding:30px 20px}
+#lessonView.on{display:block}
+.crumb{color:var(--muted);font-size:.85rem;margin-bottom:8px}
+#lessonTitle{font-family:var(--mono);font-size:1.9rem;margin-bottom:6px;color:var(--accent)}
+.lessonBody h3{color:var(--accent2);margin:36px 0 10px;font-size:1.2rem;border-bottom:1px solid var(--border);padding-bottom:6px}
+.lessonBody h4{color:var(--accent);margin:24px 0 8px}
+.lessonBody p{margin:12px 0}
+.lessonBody ul,.lessonBody ol{margin:12px 0 12px 26px}
+.lessonBody li{margin:7px 0}
+.lessonBody strong{color:#fff}
+.lessonBody em{color:var(--accent2)}
+.lessonBody table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.88rem}
+.lessonBody th,.lessonBody td{border:1px solid var(--border);padding:8px 12px;text-align:left}
+.lessonBody th{background:var(--panel2);color:var(--accent)}
+.lessonBody code{background:var(--panel2);padding:2px 7px;border-radius:5px;font-family:var(--mono);font-size:.85rem;color:var(--accent2)}
+.callout{background:var(--panel2);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0}
+.callout.warn{border-color:var(--accent2)}
+.callout.danger{border-color:var(--red)}
+.callout b{display:block;margin-bottom:6px;color:#fff}
+.diagram{background:#0d1120;border:1px solid var(--border);border-radius:12px;padding:18px;margin:22px 0;text-align:center}
+.diagram svg{max-width:100%;height:auto}
+.diagram figcaption{color:var(--muted);font-size:.82rem;margin-top:8px;font-style:italic}
+.keybox{background:linear-gradient(135deg,#12241f,#0f1a17);border:1px solid var(--green);border-radius:10px;padding:16px 20px;margin:20px 0}
+.keybox b{color:var(--green)}
+.drill{background:linear-gradient(135deg,#1b1a10,#141208);border:1px solid var(--accent2);border-radius:10px;padding:16px 20px;margin:20px 0}
+.drill b{color:var(--accent2)}
+.mistake{background:linear-gradient(135deg,#2a1416,#1c0f11);border:1px solid var(--red);border-radius:10px;padding:16px 20px;margin:20px 0}
+.mistake b{color:var(--red)}
+
+/* ---------- QUIZ ---------- */
+.quiz{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin:30px 0}
+.quiz h3{color:var(--accent);margin-bottom:16px;font-family:var(--mono)}
+.q{margin-bottom:20px}
+.q p{font-weight:600;margin-bottom:8px}
+.q label{display:block;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin:7px 0;cursor:pointer;transition:.2s}
+.q label:hover{border-color:var(--accent)}
+.q label.correct{border-color:var(--green);background:#12251f}
+.q label.wrong{border-color:var(--red);background:#251214}
+.q .exp{display:none;color:var(--muted);font-size:.88rem;margin-top:6px;border-left:3px solid var(--accent2);padding-left:12px}
+.q .exp.show{display:block}
+.wrongBadge{display:none;background:#2a1416;border:1px solid var(--red);color:var(--red);
+  font-family:var(--mono);font-weight:700;font-size:.85rem;padding:6px 14px;
+  border-radius:6px;margin-bottom:10px;letter-spacing:.05em}
+.wrongBadge.show{display:inline-block;animation:shake .3s}
+#quizResult{font-family:var(--mono);margin-top:12px;min-height:24px}
+#quizResult.pass{color:var(--green)}
+#quizResult.fail{color:var(--red)}
+
+/* ---------- NAV ---------- */
+.lessonNav{display:flex;justify-content:space-between;gap:14px;margin-top:36px;flex-wrap:wrap}
+.navBtn{background:var(--panel2);border:1px solid var(--border);color:var(--text);padding:12px 20px;border-radius:8px;cursor:pointer;font-family:var(--mono);transition:.2s}
+.navBtn:hover{border-color:var(--accent);color:var(--accent)}
+.navBtn:disabled{opacity:.35;cursor:not-allowed}
+#completeBtn{background:var(--green);color:#04241c;font-weight:700;border:none;padding:12px 26px;border-radius:8px;cursor:pointer;font-size:.95rem}
+#completeBtn:disabled{opacity:.5;cursor:not-allowed}
+#completeBtn.done{background:var(--panel2);color:var(--green);border:1px solid var(--green)}
+
+/* ---------- GLOSSARY ---------- */
+#glossSearch{width:100%;background:var(--panel);border:1px solid var(--border);color:var(--text);padding:12px 16px;border-radius:8px;font-size:1rem;margin-bottom:20px}
+.gTerm{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:10px}
+.gTerm b{color:var(--accent);font-family:var(--mono)}
+.gTerm p{color:var(--muted);font-size:.9rem;margin-top:4px}
+
+footer{border-top:1px solid var(--border);margin-top:60px;padding:30px 20px;text-align:center;color:var(--muted);font-size:.85rem}
+footer b{color:var(--accent)}
+@media(max-width:760px){
+  .hero h1{font-size:1.8rem}
+  .nav{flex-wrap:wrap;justify-content:center}
+  .heroStats{gap:20px}
+  .hero .btn{display:block;width:100%;max-width:320px;margin:0 auto 12px}
+  .hero .btn.ghost{margin-left:auto}
+  .mentorStrip{flex-direction:column;text-align:center}
+  .mentorStrip .t{text-align:center}
+  .lessonNav{flex-direction:column}
+  .lessonNav .navBtn,#completeBtn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Gilbert's <span>Academy</span><small>PROFESSIONAL SMC MASTERY</small></div>
+    <div class="navlinks">
+      <a href="#" data-nav="home" class="active">Home</a>
+      <a href="#" data-nav="curriculum">Curriculum</a>
+      <a href="#" data-nav="about">Your Mentor</a>
+      <a href="#" data-nav="glossary">Glossary</a>
+      <a href="#" data-nav="continue" id="continueLink" style="display:none">Continue →</a>
+    </div>
+    <div class="navright">
+      <div id="progressWrap"><div id="progressBarWrap"><div id="progressBar"></div></div><span id="progressPill">0/26</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- HOME -->
+<div class="view on" id="homeView">
+  <div class="hero">
+    <div class="kicker">Free · Sequential · Institutional-Grade</div>
+    <h1>Master <b>Smart Money Concepts</b><br>Like a Professional</h1>
+    <p>Hi everyone 👋 I'm Gilbert Ronoh. This is not an introduction to trading — it is a complete professional training program. 26 lessons, 6 phases, every concept in full depth: structure, liquidity, order blocks, imbalances, time, narrative, execution, risk and psychology. Nothing left behind. It's completely free, I didn't hide any content behind paywall - By Gilbert. <br>+254728029944 </p>
+    <div class="heroStats">
+      <div><b>26</b><span>DEEP LESSONS</span></div>
+      <div><b>6</b><span>PHASES</span></div>
+      <div><b>40+</b><span>QUIZ QUESTIONS</span></div>
+      <div><b>100%</b><span>FREE, FOREVER</span></div>
+    </div>
+    <button class="btn" onclick="go('curriculum')">Start the Course</button>
+    <button class="btn ghost" onclick="resume()">Resume Where I Left Off</button>
+    <div class="mentorStrip">
+      <img id="heroProfile" src="trader.png" alt="Gilbert Ronoh" onerror="this.src=PLACEHOLDER">
+      <div class="t"><b>Gilbert Ronoh</b><small>Professional SMC Trader · Your Mentor Through Every Lesson</small></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:40px 0">
+      <div class="lessonCard" style="cursor:default"><div><b>Not a Beginner Course</b><br><small style="color:var(--muted)">Built to take intermediates to pro-level execution</small></div></div>
+      <div class="lessonCard" style="cursor:default"><div><b>Hand-Drawn Diagrams</b><br><small style="color:var(--muted)">Every core mechanism visualized step by step</small></div></div>
+      <div class="lessonCard" style="cursor:default"><div><b>Quiz-Gated Mastery</b><br><small style="color:var(--muted)">Prove understanding before advancing</small></div></div>
+      <div class="lessonCard" style="cursor:default"><div><b>Professional Skills</b><br><small style="color:var(--muted)">Risk systems, backtesting, trading plan, psychology</small></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRICULUM -->
+<div class="view" id="curriculumView">
+  <div class="wrap"><h2 style="font-family:var(--mono);color:var(--accent)">Full Curriculum — Intermediate → Professional</h2>
+  <p style="color:var(--muted);margin:8px 0 10px">Lessons unlock in strict order. Pass each mastery check, mark complete, and the next opens. No skipping — professionals build foundations.</p>
+  <div id="curriculumList" class="phases"></div></div>
+</div>
+
+<!-- ABOUT / MENTOR -->
+<div class="view" id="aboutView">
+  <div class="wrap">
+    <div class="aboutCard">
+      <!-- ▼▼▼ YOUR PROFILE PICTURE: place 'profile.jpg' beside this file, upload below, or paste an image URL ▼▼▼ -->
+      <img id="profileImg" src="trader.png" alt="Gilbert Ronoh" onerror="this.src=PLACEHOLDER">
+      <h2>Gilbert Ronoh</h2>
+      <div class="role">PROFESSIONAL SMART MONEY CONCEPTS TRADER & MENTOR</div>
+      <div class="cred"><span>SMC / ICT Methodology</span><span>Top-Down Analysis</span><span>Liquidity & Order Flow</span><span>Risk-First Trading</span></div>
+      <p class="bio">
+        Welcome — I'm <strong>Gilbert Ronoh</strong>, and I'll be walking beside you through every single lesson of this academy.
+        <br><br>
+        I built this course for one reason: most SMC education online is fragmented, shallow, or locked behind paywalls that teach theory without execution. I took the opposite path. Every concept here — market structure, liquidity engineering, order blocks, imbalances, kill zones, narrative building, risk systems and trading psychology — is explained the way I wish someone had explained it to me: <em>completely</em>, with the reasoning behind every rule, so you don't just recognize patterns, you understand <strong>why</strong> price behaves the way it does.
+        <br><br>
+        This is a professional program. It assumes you already know what a candle and a timeframe are, and it will push you from there to the level where you can build a top-down narrative, grade a setup objectively, execute inside a plan, and survive long enough for your edge to play out. Trading success is not about finding a secret — it's about mastering a complete process. That process is exactly what's in front of you.
+        <br><br>
+        JUST DO ME A LITTLE FAVOUR --------
+
+        <br><br>
+        Read every lesson in order. Do the drills. Pass the checks. And when you finish, run the backtest protocol — that's where real traders are made.
+        <br><br>
+        <em>"Trade the process, not the prediction."</em> — By Gilbert Ronoh<br>
+        <em>"If you can't describe what you are doing as a process, then you don't know what you are doing!"</em> — By Gilbert Ronoh <br>
+        <em>"Commit to the process and keep showing up anyway -- many will tell you it won't work out!"</em> —  By Gilbert Ronoh<br>
+         <em>"SAY NO TO TIKTOK!!"</em> — By Gilbert Ronoh
+      </p>
+      </p>
+      
+    </div>
+  </div>
+</div>
+
+<!-- LESSON -->
+<div id="lessonView">
+  <div class="crumb" id="crumb"></div>
+  <h1 id="lessonTitle"></h1>
+  <div class="lessonBody" id="lessonBody"></div>
+  <div class="quiz" id="quizBox"></div>
+  <div id="quizResult"></div>
+  <div class="lessonNav">
+    <button class="navBtn" id="prevBtn">← Previous</button>
+    <button id="completeBtn" disabled>Mark as Complete</button>
+    <button class="navBtn" id="nextBtn">Next →</button>
+  </div>
+</div>
+
+<!-- GLOSSARY -->
+<div class="view" id="glossaryView">
+  <div class="wrap"><h2 style="font-family:var(--mono);color:var(--accent)">Glossary</h2>
+  <input id="glossSearch" placeholder="Search terms..." oninput="filterGloss()">
+  <div id="glossList"></div></div>
+</div>
+
+<footer><b>Gilbert Ronoh's Academy</b> — Free professional SMC education, <i>By $Playboy$ </i>Trade the process, not the prediction.<br>
+  TRADING IS A GAME OF PROBABILITIES WITH SIGNIFICANT AMOUNT OF RISK!!! - Nothing is 100% guarantee!!
+
+
+</footer>
+
+<script>
+const PLACEHOLDER="data:image/svg+xml;base64,"+btoa('<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"><rect width="150" height="150" fill="#161c2d"/><circle cx="75" cy="58" r="26" fill="#232c42"/><rect x="35" y="92" width="80" height="40" rx="12" fill="#232c42"/><text x="75" y="145" text-anchor="middle" fill="#8a94ab" font-size="10" font-family="monospace">ADD PHOTO</text></svg>');
+
+/* mentor note helper */
+function mentor(text){
+  const photo="trader.png";
+  return `<div class="mentorNote"><img src="${photo}" alt="Gilbert Ronoh"
+    onerror="this.onerror=null;this.src='https://via.placeholder.com/42/161c2d/8a94ab?text=G'">
+    <div class="mt"><small>FROM GILBERT RONOH — YOUR MENTOR</small><p>${text}</p></div></div>`;
+}
+
+/* ============================================================
+   DATA: PHASES, LESSONS, QUIZZES
+============================================================ */
+const PHASES=[
+ {name:"Phase 1 — Foundations Rebuilt",sub:"Re-engineer how you see markets",ids:[1,2,3,4]},
+ {name:"Phase 2 — Liquidity: The Core Engine",sub:"The map institutions trade from",ids:[5,6,7,8]},
+ {name:"Phase 3 — Order Blocks, Imbalances & Zones",sub:"The footprints and where price reacts",ids:[9,10,11,12,13]},
+ {name:"Phase 4 — Time & Context",sub:"When the money is made",ids:[14,15,16]},
+ {name:"Phase 5 — Narrative, Confluence & Execution",sub:"Assembling the professional trade",ids:[17,18,19,20]},
+ {name:"Phase 6 — Risk, Psychology & Mastery",sub:"Becoming the operator who survives",ids:[21,22,23,24,25,26]},
+];
+
+const GLOSSARY=[
+ ["Smart Money","Institutional players — banks, hedge funds, market makers — whose order flow moves price."],
+ ["BOS (Break of Structure)","A candle-close break of a swing point in the direction of the prevailing trend, confirming continuation."],
+ ["CHoCH (Change of Character)","The first candle-close break against the prevailing trend — earliest reversal warning."],
+ ["MSS (Market Structure Shift)","A CHoCH backed by displacement — the high-probability structure change."],
+ ["Displacement","Aggressive, one-sided institutional candles that leave imbalances behind."],
+ ["Liquidity","Clusters of resting stops and pending orders institutions need as counterparties."],
+ ["BSL / SSL","Buy-side / Sell-side liquidity — stops above highs / below lows."],
+ ["Liquidity Sweep","A wick through a level to trigger stops, followed by rejection back inside."],
+ ["Inducement (IDM)","Engineered minor levels placed before the real POI to bait early entries."],
+ ["FVG (Fair Value Gap)","A 3-candle imbalance where candle 1's wick and candle 3's wick don't overlap."],
+ ["CE (Consequent Encroachment)","The 50% midpoint of an FVG — the precision entry level."],
+ ["IFVG","Inversion FVG — a broken FVG that flips polarity (support↔resistance)."],
+ ["Volume Imbalance","A gap between candle bodies where wicks overlap — subtler unfilled zone."],
+ ["Liquidity Void","A large multi-candle expansion with no pullback — a magnet for rebalancing."],
+ ["Order Block (OB)","The last opposing candle before displacement that breaks structure."],
+ ["Breaker Block","A failed OB that flips and becomes the retest zone in the opposite direction."],
+ ["Mitigation Block","A zone where price returns to complete unfinished institutional business."],
+ ["Propulsion Block","A candle that reacted off a prior OB — layered confluence."],
+ ["Premium / Discount","Upper / lower half of a dealing range. Buy discount, sell premium."],
+ ["Equilibrium","The 50% midpoint of a dealing range."],
+ ["OTE (Optimal Trade Entry)","The 62–79% Fibonacci retracement of an impulsive leg."],
+ ["Dealing Range","The leg between significant swing low and high used for premium/discount."],
+ ["Kill Zone","High-probability session windows: London (02:00–05:00 NY), NY (07:00–10:00 NY)."],
+ ["Judas Swing","A false early-session move engineered to harvest liquidity before the true direction."],
+ ["AMD / Power of 3","Accumulation → Manipulation → Distribution — the daily/session script."],
+ ["Draw on Liquidity","The magnet pool price is currently gravitating toward — the basis of bias."],
+ ["Mitigation","Price returning to an OB where institutions complete unfinished orders."],
+ ["EQH / EQL","Equal highs / equal lows — obvious stop clusters (liquidity pools)."],
+ ["SMT Divergence","Correlated assets disagreeing at a level — signals a trap/liquidity event."],
+ ["Expectancy","(Win% × AvgWin) − (Loss% × AvgLoss). Positive after costs = edge."],
+ ["Gilbert","Your Mentor 🙋‍♀️😁, an SMC Trader with 4 years of experience, A guy who -- 1. Understands the logic behind price movement. 2. Who understands what drives the price fundamentally, na katalika!- kama waswahili wanaposema!"],
+ ["FX Trading","My swahili hype 😁🐰 -- (Foreign Exchange) ni mchakato wa kununua sarafu moja huku ukiuza nyingine kwa lengo la kupata faida kutokana na mabadiliko ya thamani ya sarafu. Ni soko kubwa la kifedha duniani linalofanya kazi kwa saa 24 kwa siku kuanzia Jumatatu hadi Ijumaa kupitia mitandao ya benki na mawakala (brokers)."],
+];
+
+const LESSONS=[
+/* ============ LESSON 1 ============ */
+{id:1,phase:0,title:"The Market's True Architecture",short:"Who moves price, how orders work, why retail loses",
+body:`
+${mentor("Welcome to Lesson 1. Before we touch a single chart pattern, I need to break and rebuild how you think price moves. Everything in this course stands on what you learn here — take it slowly.")}
+<p>Every professional decision you'll ever make flows from one question: <strong>who is on the other side of my trade, and why are they there?</strong> This lesson builds the full architectural model of the market — order types, liquidity mechanics, and why the retail paradigm is structurally designed to lose.</p>
+<h3>1.1 The Real Players — Ranked by Power</h3>
+<ul>
+<li><strong>Central Banks & Sovereign Institutions</strong> — set macro regimes; their policy creates the multi-week "draws" entire currencies travel toward.</li>
+<li><strong>Investment Banks (Dealing Desks)</strong> — execute massive client flow AND their own proprietary books. A single desk can move a currency pair through a session level. Their fills define the levels we trade.</li>
+<li><strong>Hedge Funds & Institutions</strong> — position over days/weeks in tranches. Their accumulation creates the pullbacks retail misreads as "weakness."</li>
+<li><strong>Market Makers</strong> — quote both sides, manage inventory, and engineer price toward pools where they can offset risk at scale.</li>
+<li><strong>Algorithms</strong> —执行 much of the engineering: stop runs, mean reversion to imbalances, session-driven behavior. They are predictable because they're programmed by the entities above.</li>
+<li><strong>Retail (you, before this course)</strong> — 90%+ lose not because they're stupid but because their orders are the <em>raw material</em> the system runs on.</li>
+</ul>
+<h3>1.2 Order Mechanics — The Machine Under the Price</h3>
+<p>Understand these four order types and the entire market becomes legible:</p>
+<table><tr><th>Order</th><th>What it does</th><th>SMC Meaning</th></tr>
+<tr><td>Limit order</td><td>Rests at a price, waits</td><td>Institutional entries rest AT zones (OBs, FVGs)</td></tr>
+<tr><td>Stop order</td><td>Triggers on a touch beyond a price</td><td>Stop losses ARE pending orders — they are the liquidity</td></tr>
+<tr><td>Market order</td><td>Fills immediately at best price</td><td>Displacement candles = market order aggression</td></tr>
+<tr><td>Stop loss</td><td>A stop order to exit</td><td>Your stop = someone's fill. This is the core secret.</td></tr></table>
+<p><strong>The critical insight:</strong> your stop loss is not "protection" in the market's eyes — it is a <em>pending market order</em> waiting to be triggered. Millions of them cluster at obvious levels. Triggering them creates real, executable volume. This volume is what large players consume.</p>
+<h3>1.3 Why Institutions Need Retail (The Transfer Model)</h3>
+<p>A fund that wants to buy 10,000 lots faces a physics problem: buying pushes price up against itself. To fill size without moving price, it must buy <strong>into selling pressure</strong>. That pressure comes from exactly two sources:</p>
+<ol>
+<li><strong>Triggered sell stops below lows</strong> — stops of longs who bought higher (sell-side liquidity, SSL).</li>
+<li><strong>Retail sellers at "obvious" resistance</strong> — traders selling a rally because they think it's "too high."</li>
+</ol>
+<p>Therefore: <strong>price is deliberately transported into liquidity pools before the real move.</strong> The wick into old lows that "ruined your trade" wasn't randomness — it was the loading mechanism.</p>
+<div class="diagram"><svg viewBox="0 0 700 320">
+<path d="M20,260 L120,260 L170,200 L260,200 L310,250 L420,250 L470,120 L560,120 L610,70 L680,70" fill="none" stroke="#5b8def" stroke-width="2.5"/>
+<line x1="170" y1="200" x2="420" y2="200" stroke="#ef5350" stroke-width="1.5" stroke-dasharray="6 4"/>
+<circle cx="310" cy="250" r="6" fill="none" stroke="#26c6a2" stroke-width="2.5"/>
+<text x="190" y="190" fill="#ef5350" font-size="12" font-family="monospace">Resting sell stops = SSL pool</text>
+<text x="230" y="278" fill="#26c6a2" font-size="12" font-family="monospace">Engineered sweep: institutions fill LONGS here</text>
+<text x="480" y="110" fill="#26c6a2" font-size="12" font-family="monospace">True expansion begins — retail is out</text>
+<text x="40" y="295" fill="#8a94ab" font-size="11" font-family="monospace">Note: the sweep low often holds for hours/days — it marks their fill zone</text>
+</svg><figcaption>Fig 1.1 — The transfer model: liquidity is harvested below lows to fuel institutional accumulation, then the real move begins.</figcaption></div>
+<h3>1.4 The Three Market States</h3>
+<p>Price exists in exactly three states — every analysis begins by identifying which:</p>
+<ol>
+<li><strong>Expansion (trending):</strong> displacement, imbalances left behind, structure breaking sequentially. SMC entries work best.</li>
+<li><strong>Consolidation (ranging):</strong> overlapping candles, no displacement, internal breaks constantly reversing. <em>Professional response: reduce activity or stand aside.</em></li>
+<li><strong>Reversal (transition):</strong> liquidity sweeps + CHoCH at extremes. Highest reward, requires the most skill.</li>
+</ol>
+<h3>1.5 Why Retail Indicators Structurally Fail</h3>
+<p>It's not that indicators "don't work" — it's <em>who</em> uses them:</p>
+<ul>
+<li><strong>Lag by construction:</strong> RSI/MACD/MAs derive from past prices; they describe, they don't predict.</li>
+<li><strong>Crowding:</strong> when everyone sees the same oversold signal, those buys become the liquidity harvested by the next sweep. Your indicator's signal IS someone's exit liquidity.</li>
+<li><strong>Context blindness:</strong> an indicator knows nothing of premium/discount, sessions, or where stops rest. The same signal is excellent at discount and catastrophic at premium.</li>
+</ul>
+<p>SMC replaces "what does my indicator say" with "what does the <em>footprint of large orders</em> say." Footprints: displacement, imbalances, structure breaks, wick behavior at levels, and time-of-day aggression.</p>
+<div class="callout"><b>Gilbert's Core Mental Model</b>Every wick into an old level asks one question: <em>did it break with displacement (genuine intent), or wick-and-reject (liquidity harvest)?</em> The entire course trains you to answer this instantly and correctly.</div>
+<h3>1.6 The Professional's Edge — Defined Precisely</h3>
+<p>Your edge is NOT speed, information, or capital. It is three things:</p>
+<ol>
+<li><strong>Selectivity:</strong> institutions only create 1–3 A+ scenarios per day per pair. You will learn to wait for them.</li>
+<li><strong>Location awareness:</strong> knowing where fills occur (zones) and where targets exist (pools) before price arrives.</li>
+<li><strong>Risk asymmetry:</strong> entering at zones where invalidation is tight and logical, targeting liquidity that is structurally distant.</li>
+</ol>
+<div class="drill"><b>Drill 1</b>Open any chart. Find the 3 most obvious equal highs/lows and old extremes. For each, write one sentence: "If price goes here, WHO gets trapped and in which direction?" This trains the liquidity lens from day one.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Price moves toward liquidity because institutions need triggered orders as counterparties.</li>
+<li>Your stop loss is a pending order — part of the raw material.</li>
+<li>Three market states: expansion (trade), consolidation (wait), reversal (skill).</li>
+<li>Indicators fail structurally: lag + crowding + zero context.</li>
+<li>Edge = selectivity + location + risk asymmetry, not prediction.</li>
+</ul></div>`,
+quiz:[
+ {q:"A stop loss is, mechanically, best understood as:",o:["Insurance that brokers honor","A pending market order waiting to be triggered","A guarantee","A retail invention with no market effect"],a:1,e:"Triggered stops become real market orders — that volume is the liquidity institutions consume."},
+ {q:"Why must a fund 'engineer price into liquidity' before buying size?",o:["To manipulate illegally","To fill large orders into triggered sell pressure without moving price against itself","To scare beginners","To reduce spreads"],a:1,e:"Buying 10k lots at once moves price against the buyer; harvested stop-sells provide the opposing volume."},
+ {q:"During consolidation, the professional response is:",o:["Trade every internal break","Reduce activity — no displacement means no institutional intent","Maximize size","Only scalp"],a:1,e:"SMC entries depend on displacement and structure; ranges neutralize both."},
+ {q:"Which is NOT one of the three professional edge sources?",o:["Selectivity","Location awareness","Risk asymmetry","Predicting news outcomes"],a:3,e:"Edge = selectivity, location, asymmetric risk — not prediction."}
+]},
+/* ============ LESSON 2 ============ */
+{id:2,phase:0,title:"Market Structure I — The Complete Foundation",short:"Swings, trends, HH/HL/LH/LL, internal vs external — every detail",
+body:`
+${mentor("This is the longest lesson in the course for a reason: structure is the skeleton of everything. If you master this lesson alone, you're ahead of 80% of 'SMC traders' on social media. Read it twice.")}
+<p>Market structure is how price communicates. Every other SMC concept — BOS, CHoCH, liquidity, order blocks — is defined <em>in terms of structure</em>. This lesson is the rigorous, complete foundation.</p>
+<h3>2.1 Defining Swings With Precision</h3>
+<p>A <strong>swing high</strong>: a bar whose high is higher than the highs of at least 2 bars on each side (fractal definition). A <strong>swing low</strong>: the mirror. But the mechanical rule is only the start — professionals add three layers of judgment:</p>
+<ul>
+<li><strong>Significance filter:</strong> a swing is structural only if breaking it <em>changes something</em> — the bias, the dealing range, or a liquidity pool. If breaking it changes nothing, it's noise.</li>
+<li><strong>Confirmation:</strong> HTF swings should be confirmed by subsequent closes, not assumed mid-formation.</li>
+<li><strong>Scale awareness:</strong> each timeframe has its own structural scale. A 5m swing is invisible on the Daily — and that's correct.</li>
+</ul>
+<h3>2.2 The Four Structural Leg-Patterns</h3>
+<table><tr><th>Pattern</th><th>Sequence</th><th>Regime & Response</th></tr>
+<tr><td>HH + HL</td><td>Each high and low exceeds the prior</td><td>Bullish trend — buy pullbacks into discount POIs</td></tr>
+<tr><td>LL + LH</td><td>Each low and high undercuts the prior</td><td>Bearish trend — sell rallies into premium POIs</td></tr>
+<tr><td>HH/HL decay</td><td>Highs still rise but pullbacks deepen</td><td>Distribution forming — tighten bias, watch for CHoCH</td></tr>
+<tr><td>EQH/EQL compression</td><td>Flat overlapping extremes</td><td>Range — liquidity building both sides; wait for expansion</td></tr></table>
+<div class="diagram"><svg viewBox="0 0 700 330">
+<path d="M30,290 L110,175 L170,235 L260,115 L330,175 L430,60 L500,145 L590,40 L670,125" fill="none" stroke="#26a69a" stroke-width="3"/>
+<circle cx="110" cy="175" r="7" fill="none" stroke="#26c6a2" stroke-width="2"/>
+<circle cx="330" cy="175" r="7" fill="none" stroke="#26c6a2" stroke-width="2"/>
+<circle cx="500" cy="145" r="7" fill="none" stroke="#26c6a2" stroke-width="2"/>
+<circle cx="260" cy="115" r="7" fill="none" stroke="#e8b73a" stroke-width="2"/>
+<circle cx="430" cy="60" r="7" fill="none" stroke="#e8b73a" stroke-width="2"/>
+<circle cx="590" cy="40" r="7" fill="none" stroke="#e8b73a" stroke-width="2"/>
+<text x="70" y="155" fill="#26c6a2" font-family="monospace" font-size="13">HL</text>
+<text x="315" y="155" fill="#26c6a2" font-family="monospace" font-size="13">HL</text>
+<text x="485" y="125" fill="#26c6a2" font-family="monospace" font-size="13">HL</text>
+<text x="240" y="100" fill="#e8b73a" font-family="monospace" font-size="13">HH</text>
+<text x="415" y="45" fill="#e8b73a" font-family="monospace" font-size="13">HH</text>
+<text x="575" y="25" fill="#e8b73a" font-family="monospace" font-size="13">HH</text>
+<text x="150" y="320" fill="#8a94ab" font-size="12" font-family="monospace">RULE: the trend lives in its lows. Each HL must be defended.</text>
+</svg><figcaption>Fig 2.1 — Uptrend anatomy. Watch the lows: a trend dies when its significant HLs break, not when a high gets poked.</figcaption></div>
+<h3>2.3 Internal vs External Structure — The Critical Distinction</h3>
+<p>Structure is <strong>fractal and nested</strong>. Confusing the scales is the #1 cause of fake reversals:</p>
+<ul>
+<li><strong>External structure</strong> — the major swings framing the whole visible trend. Everyone sees these. They hold the big liquidity pools and define the dealing range.</li>
+<li><strong>Internal structure</strong> — the smaller swings <em>within</em> the last external leg. Price breaks internal structure <em>constantly</em> while the external trend is untouched.</li>
+</ul>
+<p><strong>Worked example:</strong> Daily uptrend. Price rallies, then pulls back deep enough to break the 1H internal low. Retail screams "reversal!" But external Daily structure (the last significant HL) is 400 points below. The internal break is just a deep pullback — often precisely the discount retracement professionals were waiting to buy.</p>
+<div class="callout warn"><b>Gilbert's Rule</b>A structural break only "counts" against the trend when it breaks <em>external, significant, HTF-defined</em> structure — ideally with displacement. Everything else is a pullback until proven otherwise.</div>
+<h3>2.4 The Three Phases of Every Trend (Wyckoff Fusion)</h3>
+<ol>
+<li><strong>Accumulation / Markup:</strong> clean HH/HL, shallow pullbacks, sweeps of lows get bought instantly. Institutions are committed.</li>
+<li><strong>Distribution:</strong> highs stop advancing meaningfully; pullbacks deepen; equal highs form above (liquidity stacking); internal bearish structure appears <em>while the external chart still looks bullish</em>. This is where pros prepare and amateurs keep buying.</li>
+<li><strong>Markdown:</strong> external CHoCH confirms with displacement. Now every rally into old support / breaker zones is a professional short.</li>
+</ol>
+<h3>2.5 Strong vs Weak Highs and Lows — Predicting What Breaks First</h3>
+<p>This concept alone will change your target selection:</p>
+<ul>
+<li><strong>Strong point:</strong> a high/low formed <em>with displacement behind it</em> — aggressive orders protect it. Price struggles to trade back through; it typically <em>repels</em>.</li>
+<li><strong>Weak point:</strong> formed with no displacement — a drift high, a slow rollover. Nothing protects it; it is <strong>liquidity waiting to be consumed</strong>.</li>
+</ul>
+<p><strong>Predictive rule:</strong> in any conflict, weak points break before strong points. If the path to the HTF draw runs through a weak high — expect it to be taken. If a strong low protects the way down — expect the sweep-and-reject there.</p>
+<div class="diagram"><svg viewBox="0 0 700 300">
+<path d="M30,250 L120,150 L160,200 L240,90 L290,180 L370,110 L420,190 L500,130 L560,55 L660,230" fill="none" stroke="#5b8def" stroke-width="2.5"/>
+<circle cx="560" cy="55" r="7" fill="none" stroke="#ef5350" stroke-width="2.5"/>
+<circle cx="420" cy="190" r="7" fill="none" stroke="#26c6a2" stroke-width="2.5"/>
+<text x="430" y="45" fill="#ef5350" font-family="monospace" font-size="12">Weak high: no displacement → liquidity target</text>
+<text x="150" y="135" fill="#26c6a2" font-family="monospace" font-size="12">Strong low: displacement-protected → repels</text>
+<text x="470" y="260" fill="#e8b73a" font-family="monospace" font-size="12">Final external break = real structural event</text>
+</svg><figcaption>Fig 2.2 — Weak points get consumed first; strong (displacement-backed) points repel price.</figcaption></div>
+<h3>2.6 Inducement Preview — Structure's Trapdoor</h3>
+<p>Before a genuine HL forms, price frequently offers a <em>minor</em> pullback that retail reads as "the HL" and buys with stops underneath. That minor low is <strong>inducement</strong> — bait. True protected HLs usually form <em>after</em> the inducement sweep. Full treatment in Lesson 7; for now adopt the rule: <strong>never trust the first pullback after displacement.</strong></p>
+<h3>2.7 Structure Reading Procedure (Do This Every Time)</h3>
+<ol>
+<li>Zoom to your analysis timeframe. Mark the last 2 significant external highs and lows.</li>
+<li>Label the sequence: HH/HL (bull), LL/LH (bear), or compression (range).</li>
+<li>Identify the current dealing range (last significant low → high).</li>
+<li>Note weak vs strong points within it — which extreme is likely consumed first?</li>
+<li>Only then look at lower timeframes for internal structure and entries.</li>
+</ol>
+<div class="drill"><b>Drill 2</b>Take 10 historical chart screenshots. On each: mark external swings, label HH/HL or LL/LH, mark every internal structure break that did NOT reverse the trend. Count how many "fake reversals" you find — that number is the exact mistake you'll now avoid.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Only significant swings are structural; breaking noise means nothing.</li>
+<li>Internal ≠ external: internal breaks inside a trend are pullbacks by default.</li>
+<li>Trends live and die at their HLs/LHs.</li>
+<li>Weak points (no displacement) break first; strong points repel.</li>
+<li>First pullbacks after displacement are usually inducement, not entries.</li>
+</ul></div>`,
+quiz:[
+ {q:"Price in a Daily uptrend breaks a 1H internal low. Correct reading:",o:["Full reversal — short now","An internal pullback until external Daily structure breaks with displacement","BOS bullish","Ignore all structure"],a:1,e:"Internal breaks within external trends are pullbacks by default."},
+ {q:"A 'strong low' is one that:",o:["Holds for many candles","Formed with displacement behind it — protected by aggressive orders","Is at a round number","Has never been touched"],a:1,e:"Displacement = institutional protection = the level repels price."},
+ {q:"Which structure event defines trend death in an uptrend?",o:["A wick above the HH","Break of the last significant (external) HL","Any internal low breaking","A red candle"],a:1,e:"HLs are the trend's lifeblood — their external break is the structural failure."},
+ {q:"In distribution phase you expect:",o:["Instant crash","Deepening pullbacks, equal highs building, internal bearish structure inside a bullish-looking chart","Nothing changes","Only lower lows immediately"],a:1,e:"Distribution deteriorates from the inside: internals flip before externals."},
+ {q:"The significance filter says a swing is structural only if:",o:["It has 3 candles","Breaking it changes bias/range/liquidity — otherwise it's noise","It touched a moving average","It happened in London"],a:1,e:"Consequence defines significance — not candle counts."}
+]},
+/* ============ LESSON 3 ============ */
+{id:3,phase:0,title:"Market Structure II — BOS, CHoCH, MSS & Displacement Grading",short:"The three structure events, validation procedure, fractal alignment",
+body:`
+${mentor("Lesson 2 gave you the skeleton. Now we learn the three verbs of structure — how price announces its intent. Then I'll show you how professionals grade every break before trusting it.")}
+<h3>3.1 BOS — Break of Structure (Continuation Signal)</h3>
+<p>A <strong>BOS</strong> is a candle-close break of a swing point <em>in the direction of the prevailing trend</em>.</p>
+<ul>
+<li>Uptrend: close above the last significant HH → bullish BOS → continuation confirmed.</li>
+<li>Downtrend: close below the last significant LL → bearish BOS.</li>
+<li><strong>What it proves:</strong> the aggressive side still has institutional commitment.</li>
+<li><strong>What it creates:</strong> the leg that caused the BOS is now your POI warehouse — the OBs and FVGs inside it become pullback targets for continuation entries.</li>
+<li><strong>Wick vs close rule:</strong> a wick beyond the level without a close is NOT a BOS — it's a sweep (Lesson 6).</li>
+</ul>
+<h3>3.2 CHoCH — Change of Character (Reversal Warning)</h3>
+<p>A <strong>CHoCH</strong> is the <em>first close-broken swing against the prevailing trend</em> — in an uptrend, the first broken significant HL. Nuances professionals respect:</p>
+<ul>
+<li><strong>Suspicion, not confirmation:</strong> many CHoCHs fail — price reclaims and continues. Treat CHoCH as "the conversation has changed," not "the trend is dead."</li>
+<li><strong>Location matters:</strong> a CHoCH at a HTF POI after a liquidity sweep is a candidate reversal. A CHoCH mid-range with no liquidity event is usually just a pullback.</li>
+<li><strong>The broken level becomes the line:</strong> if price reclaims the broken HL quickly and closes back above, the CHoCH failed — original bias resumes, often violently.</li>
+</ul>
+<h3>3.3 MSS — Market Structure Shift (The Confirmed Reversal)</h3>
+<p><strong>MSS = CHoCH + displacement.</strong> The displaced, energetic break that leaves imbalance behind. This is the version professionals act on. Grading table:</p>
+<table><tr><th>Break Character</th><th>Reading</th><th>Action</th></tr>
+<tr><td>Fast candles + FVG left behind + closes through</td><td>Institutional intent — MSS</td><td>Trust and plan entries</td></tr>
+<tr><td>Slow overlapping grind through the level</td><td>Low conviction — possibly inducement</td><td>Wait; suspect trap</td></tr>
+<tr><td>Single-candle spike, immediate retrace inside</td><td>Sweep, not a break</td><td>Original bias likely intact</td></tr></table>
+<div class="diagram"><svg viewBox="0 0 720 340">
+<path d="M30,290 L110,195 L160,245 L250,145 L310,205 L400,105 L450,165 L520,70 L560,235 L610,125 L690,55" fill="none" stroke="#26a69a" stroke-width="2.5"/>
+<path d="M520,70 L560,235" fill="none" stroke="#ef5350" stroke-width="3.5"/>
+<line x1="310" y1="205" x2="600" y2="205" stroke="#e8b73a" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="225" y="130" fill="#e8b73a" font-family="monospace" font-size="12">HH — closed above = BOS</text>
+<text x="330" y="228" fill="#e8b73a" font-family="monospace" font-size="12">Significant HL</text>
+<text x="565" y="255" fill="#ef5350" font-family="monospace" font-size="12">Displaced close below HL = CHoCH→MSS</text>
+<text x="40" y="325" fill="#8a94ab" font-size="11" font-family="monospace">BOS (yellow leg) continues; the red displaced leg through the HL is the shift.</text>
+</svg><figcaption>Fig 3.1 — BOS extends the trend; the displaced break of the significant HL is the MSS that flips bias.</figcaption></div>
+<h3>3.4 The 5-Step Break Validation Procedure</h3>
+<ol>
+<li><strong>Identify the swing</strong> — external and significant, not noise.</li>
+<li><strong>Wait for the close</strong> — body close beyond, not a wick.</li>
+<li><strong>Grade displacement</strong> — large bodies? FVG created? One-candle aggression?</li>
+<li><strong>Check the reclaim</strong> — does price hold beyond, or wick straight back? Immediate re-entry = failed break.</li>
+<li><strong>Only now label</strong> BOS or CHoCH/MSS and update your bias. No labels until all four prior steps pass.</li>
+</ol>
+<h3>3.5 Fractal Alignment — The Multi-Timeframe Machine</h3>
+<p>Structure is fractal: every TF's structure is built from the TF below. The professional stack:</p>
+<ol>
+<li><strong>HTF (Daily/4H):</strong> trend + location (premium/discount) + draw on liquidity → <em>bias</em>.</li>
+<li><strong>MTF (1H/15m):</strong> locate the unmitigated POI inside the HTF narrative where institutions would fill.</li>
+<li><strong>LTF (5m/1m):</strong> wait for the CHoCH/MSS <em>inside the POI</em> → <em>timing</em>.</li>
+</ol>
+<div class="callout"><b>Gilbert's Iron Rule</b>Bias flows downhill: HTF overrides LTF. Timing flows uphill: LTF overrides HTF vagueness. An HTF-bullish trader shorting a 5m CHoCH at premium is donating money; the same trader buying an HTF discount POI after a 5m bullish MSS is operating professionally.</div>
+<h3>3.6 Structure Failure Patterns to Memorize</h3>
+<ul>
+<li><strong>Failed CHoCH reclaim:</strong> CHoCH occurs → price immediately reclaims the broken level → expect aggressive continuation of the ORIGINAL trend (the failed reversal traps the reversal traders, creating fuel).</li>
+<li><strong>Double CHoCH chop:</strong> CHoCH up, CHoCH down rapidly = range, not trend. Stand down.</li>
+<li><strong>Displacement without structure:</strong> a huge candle that breaks nothing = likely a sweep or news spike; no structural meaning until a swing breaks.</li>
+</ul>
+<div class="drill"><b>Drill 3</b>Replay 20 historical structure breaks. For each: close or wick? Displacement yes/no? Reclaimed within 3 candles yes/no? Build your own statistics — you'll discover the displacement filter's win-rate impact personally.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>BOS = with-trend close-through (continuation). CHoCH = against-trend close-through (warning). MSS = CHoCH + displacement (actionable).</li>
+<li>Five-step validation before any label: swing → close → displacement → reclaim → label.</li>
+<li>Bias from HTF, timing from LTF — never reversed.</li>
+<li>Failed CHoCHs fuel violent continuation — the reclaim is a signal in itself.</li>
+</ul></div>`,
+quiz:[
+ {q:"MSS differs from CHoCH because:",o:["It's on HTF only","Displacement backs the break — institutional confirmation","It uses wicks","It happens at equilibrium"],a:1,e:"MSS = CHoCH + displacement; the energy is the confirmation."},
+ {q:"A wick above the HH with a close back below is:",o:["A bullish BOS","A sweep — not a break","A CHoCH","Invalid data"],a:1,e:"BOS requires a body close; wicks harvest liquidity instead."},
+ {q:"A CHoCH occurs, then price immediately closes back above the broken HL. Expect:",o:["Confirmed reversal down","Violent continuation of the original uptrend — failed reversal traps fuel it","Chop forever","Nothing"],a:1,e:"Failed CHoCH reclaims trap reversal traders — their stops fuel the original trend."},
+ {q:"Correct MTF workflow:",o:["Bias from LTF, timing from HTF","Bias from HTF structure+location, timing from LTF MSS at the POI","Trade one TF only","Random"],a:1,e:"HTF gives direction/location; LTF gives precision execution."},
+ {q:"A slow, overlapping, wicky grind through a significant HL suggests:",o:["Strong institutional selling","Low conviction — possible inducement/trap","Guaranteed continuation","Immediate MSS"],a:1,e:"Institutional moves displace; grinds lack the order aggression."}
+]},
+/* ============ LESSON 4 ============ */
+{id:4,phase:0,title:"Candles, Displacement & Order Flow Reading",short:"Reading candle anatomy like an institutional footprint",
+body:`
+${mentor("Candlestick patterns (engulfing, doji, hammers) are retail theater. But the candle itself — its body, wicks and speed — is the raw telemetry of order flow. This lesson teaches you to read candles the way a dealing desk does.")}
+<h3>4.1 Candle Anatomy as Order Flow</h3>
+<ul>
+<li><strong>Large body, tiny wicks:</strong> one side dominated from open to close — aggressive market orders, institutional participation.</li>
+<li><strong>Long wick, small body:</strong> price traveled then got <em>rejected</em> — someone absorbed aggressively at the extreme. Ask: absorbed by whom, at what level?</li>
+<li><strong>Small body, wicks both sides:</strong> balance — two-sided fight. Context-level candle, not a signal.</li>
+<li><strong>Successive full-bodied candles:</strong> displacement. Institutions working an agenda across multiple fills.</li>
+</ul>
+<h3>4.2 Displacement — The Master Signature</h3>
+<p><strong>Displacement</strong> is the single most important candle phenomenon in SMC:</p>
+<ul>
+<li><strong>Definition:</strong> a sequence of large-bodied, minimal-wick candles moving in one direction, typically leaving an FVG.</li>
+<li><strong>What it means:</strong> urgency. An institution needed to get filled <em>now</em> and was willing to pay through levels to do it.</li>
+<li><strong>What it creates:</strong> the imbalances (FVGs) that become entry zones, and the structure breaks (BOS/MSS) that define bias.</li>
+<li><strong>Grading:</strong> 1 candle = news spike (be careful); 2–3 clean candles with an FVG = genuine; a slow crawl = not displacement at all.</li>
+</ul>
+<div class="diagram"><svg viewBox="0 0 700 300">
+<g stroke="#26a69a" stroke-width="3" fill="none">
+<line x1="80" y1="230" x2="80" y2="190"/><rect x="72" y="200" width="16" height="26" fill="#26a69a"/>
+<line x1="140" y1="210" x2="140" y2="150"/><rect x="132" y="160" width="16" height="46" fill="#26a69a"/>
+<line x1="200" y1="170" x2="200" y2="80"/><rect x="192" y="90" width="16" height="76" fill="#26a69a"/>
+<line x1="260" y1="110" x2="260" y2="60"/><rect x="252" y="68" width="16" height="38" fill="#26a69a"/>
+</g>
+<rect x="100" y="180" width="120" height="24" fill="rgba(38,198,162,0.18)" stroke="#26c6a2" stroke-dasharray="4 3"/>
+<text x="120" y="145" fill="#26c6a2" font-family="monospace" font-size="12">FVG left behind = proof of displacement</text>
+<text x="300" y="90" fill="#e8b73a" font-family="monospace" font-size="12">Full bodies, no wicks = market-order aggression</text>
+</svg><figcaption>Fig 4.1 — Displacement: consecutive full-bodied candles leaving an imbalance in their wake.</figcaption></div>
+<h3>4.3 Absorption & Rejection — Reading the Wicks at Levels</h3>
+<p>At significant levels, wick behavior tells you who's in control:</p>
+<table><tr><th>Behavior at level</th><th>Order-flow reading</th></tr>
+<tr><td>Deep wick through, fast close back inside</td><td>Sweep + absorption — opposing institution stepped in</td></tr>
+<tr><td>Small wicks, choppy candles at the level</td><td>Two-sided battle — level may fail; wait for displacement</td></tr>
+<tr><td>Level touched, immediate strong rejection candle</td><td>Resting institutional limit orders defended it</td></tr>
+<tr><td>Level sliced with full bodies + FVG</td><td>Genuine break — the level is gone (or becomes IFVG)</td></tr></table>
+<h3>4.4 Momentum Context — Where the Candle Happens Matters More Than the Candle</h3>
+<p>The identical strong bullish candle means three different things in three locations:</p>
+<ol>
+<li>At a HTF discount POI after a sweep → probable institutional entry (trade it).</li>
+<li>Mid-range on no confluence → probable noise or inducement.</li>
+<li>Into premium HTF liquidity → probable <em>exit</em> candles of institutions taking profit — actually a bearish signal.</li>
+</ol>
+<div class="callout warn"><b>Gilbert's Warning</b>Never read a candle in isolation. A candle is a word; structure is the sentence; the narrative is the paragraph. Isolated candle reading is exactly how retail loses.</div>
+<h3>4.5 Volume — How to Use It Without Being a "Volume Trader"</h3>
+<ul>
+<li><strong>Use volume as confirmation, not signal:</strong> displacement WITH elevated volume = high conviction; displacement on thin volume = suspect (illiquid session? holiday?).</li>
+<li><strong>Climactic volume at extremes</strong> after a long trend + a sweep = potential exhaustion/absorption.</li>
+<li><strong>Dead volume in kill zones</strong> = bank holiday or abnormal session — skip the day.</li>
+</ul>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Bodies = aggression; wicks = absorption/rejection; sequence = intent.</li>
+<li>Displacement is the master signature: urgency + imbalance + structure breaks.</li>
+<li>Location changes candle meaning entirely — never read in isolation.</li>
+<li>Volume confirms displacement; it never replaces structure.</li>
+</ul></div>`,
+quiz:[
+ {q:"Displacement is best defined as:",o:["Any red candle","Consecutive full-bodied candles with minimal wicks, often leaving an FVG","High volume only","A doji at support"],a:1,e:"Displacement = urgency: full bodies, speed, and the imbalance left behind."},
+ {q:"A deep wick below a level with a fast close back above means:",o:["Bears are winning","A sweep with absorption — an opposing institution stepped in","Nothing","Time to short the breakdown"],a:1,e:"Wick-through-and-reclaim = stops taken + aggressive absorption."},
+ {q:"A strong bullish candle firing directly into HTF premium liquidity is most likely:",o:["A buy signal","Institutional exit candles — actually a bearish location signal","Neutral","A BOS"],a:1,e:"Into premium, aggression is often profit-taking: location flips the meaning."},
+ {q:"Volume's correct role in SMC:",o:["Primary signal","Confirmation of displacement and session quality","Irrelevant","Replacement for structure"],a:1,e:"Volume confirms conviction; structure leads."}
+]},
+/* ============ LESSON 5 ============ */
+{id:5,phase:1,title:"Liquidity Types & Pools — The Complete Map",short:"BSL/SSL, EQH/EQL, session & trendline liquidity, draw on liquidity",
+body:`
+${mentor("Phase 2 begins here — and in my view this is the most important phase of the course. Liquidity is the WHY behind every price move. Structure tells you what; liquidity tells you why and where next.")}
+<h3>5.1 The Two Sides of the Book</h3>
+<ul>
+<li><strong>Buy-Side Liquidity (BSL):</strong> resting buy stops above old highs, equal highs, trendline highs, round numbers, session highs. Triggered by upward price.</li>
+<li><strong>Sell-Side Liquidity (SSL):</strong> resting sell stops below old lows, equal lows, session lows. Triggered by downward price.</li>
+</ul>
+<p>Remember Lesson 1: these stops are executable orders. Price is <em>attracted</em> to them because triggering them produces the volume large players need.</p>
+<h3>5.2 The Complete Liquidity Map — Where Orders Cluster</h3>
+<ol>
+<li><strong>Equal highs/lows (EQH/EQL):</strong> retail sees "double top = resistance!" and stacks stops there. The more textbook-perfect, the bigger the pool.</li>
+<li><strong>Relative equal highs/lows:</strong> near-equal (within a few ticks) that <em>look</em> equal on your screen — institutions see them as one pool.</li>
+<li><strong>Old highs/lows:</strong> previous day/week/month/session extremes. Time-based stops concentrate here.</li>
+<li><strong>Trendline liquidity:</strong> every retail trendline has stops just behind it. Diagonal pools.</li>
+<li><strong>Round numbers:</strong> psychological clustering (00s, 50s). Sub-pools within bigger pools.</li>
+<li><strong>Asian range extremes:</strong> the overnight high/low — London's breakfast.</li>
+<li><strong>Inside imbalances:</strong> unfilled FVGs act as low-friction corridors price travels fast.</li>
+</ol>
+<div class="diagram"><svg viewBox="0 0 700 320">
+<rect x="30" y="60" width="170" height="130" fill="none" stroke="#8a94ab" stroke-dasharray="5 4" stroke-width="1.5"/>
+<text x="50" y="52" fill="#8a94ab" font-family="monospace" font-size="12">Asian range (accumulation)</text>
+<path d="M210,140 L270,50 L330,160 L390,55 L450,170 L520,25 L590,120 L670,70" fill="none" stroke="#26c6a2" stroke-width="2.5"/>
+<line x1="270" y1="50" x2="520" y2="50" stroke="#ef5350" stroke-width="1.5" stroke-dasharray="6 4"/>
+<line x1="30" y1="190" x2="170" y2="190" stroke="#ef5350" stroke-width="2.5"/>
+<text x="320" y="40" fill="#ef5350" font-family="monospace" font-size="12">Equal highs + Asian high = BSL stack</text>
+<text x="30" y="215" fill="#ef5350" font-family="monospace" font-size="12">Asian low = SSL</text>
+<text x="300" y="250" fill="#8a94ab" font-size="11" font-family="monospace">London opens → which pool goes first? That IS your bias question.</text>
+</svg><figcaption>Fig 5.1 — The session-liquidity map: Asian extremes and equal highs are the opening session's targets.</figcaption></div>
+<h3>5.3 Dual Roles: Target vs Fuel</h3>
+<p>This distinction is the professional's compass:</p>
+<ul>
+<li><strong>Liquidity as TARGET:</strong> price is <em>drawn toward</em> an unswept pool. "The draw on liquidity" is your directional thesis. A weekly high full of unswept stops above = bullish lean.</li>
+<li><strong>Liquidity as FUEL:</strong> once swept, those orders powered the move — and become the energy for the <em>opposite</em> direction. Sweep of SSL below → fuel for the rally that follows.</li>
+</ul>
+<p><strong>The sequence logic:</strong> price draws toward Pool A → sweeps it → that harvested fuel propels price toward Pool B on the other side. Markets are a relay race of liquidity events.</p>
+<h3>5.4 Ranking Pools — Which Gets Consumed First</h3>
+<ol>
+<li><strong>Alignment with HTF draw</strong> — pools in the direction of the higher-timeframe magnet win.</li>
+<li><strong>Freshness</strong> — unswept pools outrank repeatedly-tested ones (each test "eats" some of the pool).</li>
+<li><strong>Obviousness</strong> — textbook EQH visible to every retail chart outranks a subtle one.</li>
+<li><strong>Size of the move that formed it</strong> — extremes of large legs hold larger stops.</li>
+<li><strong>Proximity</strong> — nearer pools get taken before farther ones, all else equal.</li>
+</ol>
+<h3>5.5 Liquidity Behind Structure — The Hidden Layer</h3>
+<p>Every structural level has a liquidity shadow: stops sit just <em>behind</em> obvious swing points (a few ticks beyond the wick). This is why sweeps often overshoot the visible level by a hair. When marking pools, extend them to the <strong>extreme wick</strong>, never the candle body — and expect a few ticks beyond.</p>
+<div class="callout"><b>Gilbert's Reframe</b>Stop asking "is this support or resistance?" — that question makes you a level trader, and level traders get swept. Ask instead: "where is the liquidity, who is trapped, and which pool gets consumed next?" That question IS the trade.</div>
+<div class="drill"><b>Drill 4</b>On 10 Daily charts, mark every pool: EQH/EQL, old week high/low, obvious trendlines. Then watch (replay) which pool price went for first. Tally: how often did it take the pool aligned with the prevailing HTF trend? That percentage is your bias filter.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Stops are orders; their clusters form the true map of the market.</li>
+<li>Every pool is both a target (before sweep) and fuel (after sweep).</li>
+<li>Rank pools: HTF alignment > freshness > obviousness > size > proximity.</li>
+<li>Mark pools at wick extremes — expect overshoot.</li>
+</ul></div>`,
+quiz:[
+ {q:"Equal highs on a chart primarily represent:",o:["Unbreakable resistance","A cluster of buy stops = a liquidity pool","Retail profit targets","Institutional support"],a:1,e:"Retail stops above equal highs form the pool — a magnet, not a wall."},
+ {q:"Price sweeps SSL below old lows then displaces up. The sweep acted as:",o:["Only a target","Fuel powering the bullish reversal","A short signal","Noise"],a:1,e:"Harvested sell-stops become the buy-side energy of the reversal."},
+ {q:"Which pool is consumed first, all else equal?",o:["A stale thrice-tested level","The fresh, obvious pool aligned with the HTF draw","A random minor swing","Always the farthest one"],a:1,e:"HTF alignment + freshness + obviousness = priority."},
+ {q:"When marking a liquidity pool you should extend it to:",o:["The candle body","The extreme wick — and expect slight overshoot","The round number","The 50% level"],a:1,e:"Stops sit behind the visible extreme; sweeps overshoot a few ticks."},
+ {q:"'Draw on liquidity' means:",o:["Your chart drawing tool","The magnet pool price gravitates toward — your directional thesis","The stop loss","An indicator"],a:1,e:"It's the directional magnet — the foundation of narrative (Lesson 17)."}
+]},
+/* ============ LESSON 6 ============ */
+{id:6,phase:1,title:"Sweeps, Stop Hunts & Liquidity Engineering",short:"Sweep vs breakout, the reclaim, engineered liquidity, double tops",
+body:`
+${mentor("If you only master one event in this entire course, master the sweep. It is the moment money changes hands — and it precedes almost every real move. I'll give you the exact identification protocol I use.")}
+<h3>6.1 The Anatomy of a Sweep — Four Phases</h3>
+<ol>
+<li><strong>Approach:</strong> price moves with decreasing energy toward an old high/low or equal extremes — often slow, wicky, unconvincing (deliberate, so nobody suspects).</li>
+<li><strong>Pierce:</strong> a fast push <em>through</em> the level — stops trigger in a cascade. This is where the pool is harvested.</li>
+<li><strong>Rejection/Reclaim:</strong> aggressive opposing candles appear within the same candle or 1–2 candles, <em>closing back inside</em> the level.</li>
+<li><strong>Displacement:</strong> the counter-move expands rapidly, often leaving an FVG and breaking minor structure (CHoCH).</li>
+</ol>
+<h3>6.2 Sweep vs Genuine Breakout — The Definitive Comparison</h3>
+<table><tr><th>Feature</th><th>Sweep</th><th>Real Breakout</th></tr>
+<tr><td>Close</td><td>Closes back inside the level</td><td>Closes and holds beyond</td></tr>
+<tr><td>Speed pattern</td><td>Fast spike, fast rejection</td><td>Sustained expansion, pause, continuation</td></tr>
+<tr><td>Follow-through</td><td>Immediate counter-displacement</td><td>Retest holds, then continues</td></tr>
+<tr><td>HTF location</td><td>Into HTF POI / range extreme / against HTF draw</td><td>In the direction of the HTF draw</td></tr>
+<tr><td>Imbalance created</td><td>FVG opposite to the pierce</td><td>FVG in the break direction</td></tr>
+<tr><td>Session context</td><td>Often at kill-zone opens (Judas)</td><td>Often mid-session continuation</td></tr></table>
+<div class="diagram"><svg viewBox="0 0 700 320">
+<line x1="30" y1="200" x2="670" y2="200" stroke="#8a94ab" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="30" y="190" fill="#8a94ab" font-family="monospace" font-size="12">Old lows (SSL pool)</text>
+<path d="M30,60 L130,150 L230,120 L330,245 L380,268 L430,258 L530,140 L630,70" fill="none" stroke="#26c6a2" stroke-width="2.5"/>
+<circle cx="380" cy="268" r="8" fill="none" stroke="#ef5350" stroke-width="2.5"/>
+<text x="300" y="295" fill="#ef5350" font-family="monospace" font-size="12">① Pierce ② fast reclaim (close back above)</text>
+<text x="450" y="130" fill="#26c6a2" font-family="monospace" font-size="12">③ Displacement up + FVG = reversal engine</text>
+</svg><figcaption>Fig 6.1 — Pierce, reclaim, displace: the three-step heartbeat of every SMC reversal.</figcaption></div>
+<h3>6.3 Why "It Hit My Stop Then Went My Way" — Explained Fully</h3>
+<p>Your stop below the low <em>was the liquidity</em>. The institution needed your sell order to fill their buy. When the market "reverses right after your stop," you weren't unlucky — you were <strong>the counterparty</strong>. Two transformations follow from internalizing this:</p>
+<ol>
+<li><strong>Emotional:</strong> stop-outs stop feeling like sabotage and start feeling like tuition inside a known mechanism.</li>
+<li><strong>Tactical:</strong> the sweep's extreme becomes YOUR reference. Their fill zone marks where the real move begins — the wick extreme often holds for hours or days.</li>
+</ol>
+<h3>6.4 Engineered Liquidity — Institutions Create the Bait</h3>
+<p>Institutions don't only harvest existing pools — they <strong>manufacture</strong> them:</p>
+<ul>
+<li><strong>Short-term highs/lows:</strong> a minor pullback creates an obvious mini-level; retail buys/sells it; sweeping it provides fills without disturbing HTF structure.</li>
+<li><strong>Engineered double tops/bottoms:</strong> the second touch exists to collect the breakout-anticipators' stops <em>before</em> the real breakout runs without them.</li>
+<li><strong>Judas swings (Lesson 14):</strong> session-scale engineering at kill-zone opens.</li>
+<li><strong>Slow drift into levels:</strong> a low-energy crawl toward an old low builds confidence in short sellers — whose stops then become fuel when the real move starts.</li>
+</ul>
+<h3>6.5 The Sweep → Reclaim → Displacement → CHoCH Sequence</h3>
+<p>This is the highest-frequency professional reversal sequence in SMC. Memorize the order:</p>
+<ol>
+<li>Sweep of significant SSL/BSL <strong>at a HTF POI</strong>.</li>
+<li>Reclaim back inside the level (candle close).</li>
+<li>Displacement creating an FVG in the new direction.</li>
+<li>CHoCH on the LTF confirming the shift.</li>
+<li>Entry at the FVG/CE — stop behind the sweep extreme.</li>
+</ol>
+<p>When all five align inside a kill zone with HTF agreement — that is the A+ template you'll formalize in Phase 5.</p>
+<h3>6.6 Sweep Quality Grading</h3>
+<table><tr><th>Grade</th><th>Characteristics</th></tr>
+<tr><td>A+</td><td>HTF pool + HTF POI + kill zone + instant violent reclaim + FVG</td></tr>
+<tr><td>B</td><td>MTF pool, clean reclaim, some displacement</td></tr>
+<tr><td>C</td><td>Minor pool mid-range, slow reclaim, no FVG — skip</td></tr></table>
+<div class="drill"><b>Drill 5</b>Find 15 historical sweeps on your pair. For each, grade using the table above, then verify what price did over the next 20 candles. Record: how did A+ sweeps perform vs C sweeps? You are building your own statistical proof.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Sweep = pierce + fast reclaim; breakout = close and hold beyond with continuation.</li>
+<li>Your swept stop was a deliberate fill for the other side — the extreme becomes a reference level.</li>
+<li>Master sequence: sweep → reclaim → displacement → CHoCH → FVG entry.</li>
+<li>Grade every sweep; only A/B grades deserve capital.</li>
+</ul></div>`,
+quiz:[
+ {q:"The strongest single confirmation a pierce was a sweep:",o:["High volume alone","Immediate reclaim with counter-displacement","A doji","It happened on Monday"],a:1,e:"Reclaim + displacement opposite proves the level was harvested, not broken."},
+ {q:"An engineered double top usually exists to:",o:["Confirm resistance","Collect breakout-anticipators' liquidity before the true move","Signal certain reversal","Reduce volatility"],a:1,e:"The second touch harvests the crowd that the real breakout leaves behind."},
+ {q:"After a valid sweep, the wick extreme often:",o:["Breaks again immediately","Becomes a reference level that holds — the institutional fill zone","Means nothing","Guarantees profit"],a:1,e:"Their fills defend that extreme; it becomes the trade's invalidation."},
+ {q:"In the A+ sequence, entry occurs at:",o:["The sweep wick itself, no plan","The FVG/CE formed by the displacement, stop behind the sweep extreme","The old high","Random"],a:1,e:"Entry zone = the imbalance the reversal displacement created."},
+ {q:"A minor mid-range sweep with a slow reclaim and no FVG is:",o:["A+ setup","C-grade — skip","Full-size trade","A guaranteed reversal"],a:1,e:"No HTF POI, no displacement = no institutional participation."}
+]},
+/* ============ LESSON 7 ============ */
+{id:7,phase:1,title:"Inducement — Engineered Bait",short:"IDM mechanics, placement, trading rules around it",
+body:`
+${mentor("Inducement is the concept that finally answers the question that breaks most traders: 'Why did price tap my level, hesitate, then blow straight through it?' Once you see inducement, you cannot unsee it.")}
+<h3>7.1 Definition, Precisely</h3>
+<p><strong>Inducement (IDM)</strong> is a minor, engineered level formed <em>in front of</em> (before) the real POI, designed to bait early retail entries. Their stops at that minor level become the liquidity harvested <em>on the way to</em> — or as the trigger for — the true institutional zone.</p>
+<h3>7.2 The Complete Inducement Sequence</h3>
+<ol>
+<li>Price displaces up powerfully, leaving a POI (FVG/OB) below.</li>
+<li>Price pulls back and forms a <em>minor</em> low — retail reads "the HL is in, buying pullback" with stops underneath.</li>
+<li>Price drifts down and sweeps that minor low — the bait triggers.</li>
+<li>With that liquidity cleared, price continues <em>into the real POI</em>.</li>
+<li>At the true POI, a genuine protected low forms, then the real expansion begins.</li>
+</ol>
+<div class="diagram"><svg viewBox="0 0 700 320">
+<path d="M30,270 L150,100 L230,185 L300,135 L380,245 L450,80 L570,55" fill="none" stroke="#26a69a" stroke-width="2.5"/>
+<line x1="230" y1="185" x2="380" y2="185" stroke="#ef5350" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="130" y="205" fill="#ef5350" font-family="monospace" font-size="12">IDM — bait low (retail buys it, stops below)</text>
+<line x1="380" y1="245" x2="500" y2="245" stroke="#26c6a2" stroke-width="3"/>
+<text x="330" y="275" fill="#26c6a2" font-family="monospace" font-size="12">Real POI — true protected low forms here</text>
+<text x="40" y="305" fill="#8a94ab" font-size="11" font-family="monospace">Order of events: displacement → bait low → bait swept → real POI tagged → expansion.</text>
+</svg><figcaption>Fig 7.1 — The bait comes first; the real zone hides behind it. Never enter at the first level after displacement.</figcaption></div>
+<h3>7.3 Where Inducement Hides — The Checklist</h3>
+<ul>
+<li><strong>The first pullback after strong displacement</strong> — near-universal.</li>
+<li><strong>Minor internal lows/highs just in front of a major OB or FVG</strong> — the classic setup.</li>
+<li><strong>Trendline touches</strong> that "look perfect" — engineered to gather breakout traders.</li>
+<li><strong>Liquidity just before equal highs/lows</strong> — sweep the minor level first, then the EQH/EQL.</li>
+<li><strong>Session-scale:</strong> the Judas swing is inducement at the session level (Lesson 14).</li>
+</ul>
+<h3>7.4 Trading Rules Around Inducement</h3>
+<ul>
+<li><strong>Rule 1:</strong> never place entries or stops at the first obvious level after displacement — it is the likeliest sweep target in the entire chart.</li>
+<li><strong>Rule 2:</strong> once inducement is swept AND price reaches the real POI, the setup is <em>stronger</em> — the runway is cleared. Sweep-then-tag = professional long/short trigger.</li>
+<li><strong>Rule 3:</strong> if inducement is swept but price <em>fails to reach</em> the POI and displaces away — the narrative may be shifting. Reassess honestly; do not marry the bias.</li>
+<li><strong>Rule 4:</strong> mark IDM levels during pre-market mapping (Lesson 17) so their sweep is an anticipated event, not a surprise.</li>
+</ul>
+<div class="callout"><b>Gilbert's Professional Reframe</b>When inducement gets swept, beginners think "my setup is failing." Professionals think: "the runway is being cleared." The sweep of bait liquidity is frequently the FINAL precondition before the true move — patience through the sweep is what separates the two groups.</div>
+<h3>7.5 Inducement vs Real POI — How to Tell Them Apart</h3>
+<table><tr><th>Feature</th><th>Inducement (bait)</th><th>Real POI</th></tr>
+<tr><td>Origin</td><td>Minor drift, no displacement behind it</td><td>Created by/with displacement</td></tr>
+<tr><td>Position</td><td>FIRST level after the impulse</td><td>Deeper, behind the bait</td></tr>
+<tr><td>Obviousness</td><td>Screamingly obvious to retail</td><td>Requires top-down mapping to find</td></tr>
+<tr><td>Reaction when hit</td><td>Slow chop, then slices through</td><td>Sharp displacement reaction</td></tr></table>
+<div class="drill"><b>Drill 6</b>On 10 historical impulse legs, mark the first pullback low, the next deeper zone, and what happened at each. Count: sweeps of first levels vs defenses of first levels. Internalize the ratio.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>IDM = engineered minor levels in front of real POIs, baiting early entries.</li>
+<li>Swept inducement + tagged real POI = stronger setup, not a failed one.</li>
+<li>First levels after displacement are almost always bait.</li>
+<li>Bait is obvious, unenergetic and sliced through; real POIs react with displacement.</li>
+</ul></div>`,
+quiz:[
+ {q:"Inducement is:",o:["Random noise","A minor engineered level baiting early entries before the real POI","The real entry zone","A candlestick pattern"],a:1,e:"Bait whose stops feed institutions before price reaches the true zone."},
+ {q:"IDM is swept but price never reaches your POI and displaces away. You:",o:["Buy anyway","Reassess — the narrative may be shifting","Double size","Ignore forever"],a:1,e:"Failure to complete the sequence invalidates the expected playbook."},
+ {q:"Compared to the real POI, inducement is typically:",o:["Deeper and hidden","Obvious, unenergetic, and the FIRST level after the impulse","Stronger","Formed with displacement"],a:1,e:"Bait is visible and weak; real zones require mapping and displace on arrival."},
+ {q:"After a strong bullish displacement, the first pullback low is usually:",o:["The safest long entry","Inducement","A BOS level","Irrelevant"],a:1,e:"First pullbacks post-displacement are the classic bait location."}
+]},
+/* ============ LESSON 8 ============ */
+{id:8,phase:1,title:"Imbalances: FVG, IFVG, Volume Imbalance & Liquidity Voids",short:"Formation, CE, mitigation behavior, inversion, voids",
+body:`
+${mentor("Imbalances are the fingerprints displacement leaves behind. They're also where I place most of my own entries — because a gap tells you exactly where one-sided order flow overwhelmed the other. Learn every variant here.")}
+<h3>8.1 Fair Value Gap — Exact Formation Rules</h3>
+<p>An FVG spans <strong>three candles</strong>: candle 1's wick and candle 3's wick fail to overlap. In an up-move: <code>low of candle 3 > high of candle 1</code>. That band saw only one-sided trade — one side of the market was completely overwhelmed.</p>
+<ul>
+<li><strong>Bullish FVG:</strong> gap in an up-leg → acts as support on retest.</li>
+<li><strong>Bearish FVG:</strong> gap in a down-leg → acts as resistance on retest.</li>
+<li><strong>Quality check:</strong> FVGs from displacement + structure breaks are institutional. FVGs from drifting candles are noise.</li>
+</ul>
+<h3>8.2 Consequent Encroachment (CE)</h3>
+<p>The <strong>50% midpoint</strong> of the FVG. Behavioral logic: partial filling toward CE represents "rebalancing" — restoring two-sided trade to the scarred band. Price that taps CE and reacts is touching true fair value; price that blows through CE without a fight signals the gap was never institutional. <strong>Professionals set limit entries at CE, not at the gap edge.</strong></p>
+<div class="diagram"><svg viewBox="0 0 700 320">
+<g stroke="#8a94ab" stroke-width="2" fill="none">
+<line x1="90" y1="60" x2="90" y2="180"/><rect x="82" y="90" width="16" height="70" fill="none" stroke="#8a94ab" stroke-width="2"/>
+<line x1="150" y1="90" x2="150" y2="240"/><rect x="142" y="120" width="16" height="100" fill="none" stroke="#8a94ab" stroke-width="2"/>
+<line x1="210" y1="20" x2="210" y2="150"/><rect x="202" y="30" width="16" height="100" fill="#26a69a"/>
+</g>
+<rect x="100" y="90" width="110" height="30" fill="rgba(38,198,162,0.15)" stroke="#26c6a2" stroke-dasharray="4 3"/>
+<line x1="100" y1="105" x2="210" y2="105" stroke="#e8b73a" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="240" y="95" fill="#26c6a2" font-family="monospace" font-size="12">Bullish FVG: candle1 high → candle3 low</text>
+<text x="240" y="115" fill="#e8b73a" font-family="monospace" font-size="12">CE = 50% midpoint — the sniper entry</text>
+</svg><figcaption>Fig 8.1 — FVG anatomy: the unfilled band between candle 1's high and candle 3's low, with CE marked.</figcaption></div>
+<h3>8.3 When FVGs Hold vs Fill — The Decision Matrix</h3>
+<table><tr><th>Condition</th><th>Expected behavior</th></tr>
+<tr><td>Fresh (unmitigated) + displacement origin</td><td>Strong reaction likely</td></tr>
+<tr><td>Aligned with HTF draw direction</td><td>Acts as entry zone</td></tr>
+<tr><td>In discount (for buys) / premium (for sells)</td><td>Highest quality</td></tr>
+<tr><td>Old, repeatedly tested</td><td>Weak — likely full fill/pass-through</td></tr>
+<tr><td>Counter to HTF direction</td><td>Likely consumed en route to the real draw</td></tr>
+<tr><td>Created without displacement</td><td>Not institutional — ignore</td></tr></table>
+<h3>8.4 Inversion FVG (IFVG)</h3>
+<p>When price <strong>closes through</strong> an FVG with displacement, the gap flips polarity: a broken bullish FVG becomes <em>resistance</em>; a broken bearish FVG becomes <em>support</em>. Why it works: the orders that defended the gap are now trapped on the wrong side; their unwinding creates the reaction. IFVG retests are among the most reliable LTF entry triggers — especially when the inverted gap coincides with a breaker zone.</p>
+<h3>8.5 Volume Imbalance</h3>
+<p>A subtler scar: candle <strong>bodies</strong> gap while wicks overlap. The band between body 1's close and body 3's open is unfilled two-sided trade. Weaker than an FVG but stacks beautifully when overlapping one.</p>
+<h3>8.6 Liquidity Voids</h3>
+<p>Large multi-candle expansions with almost no pullback leave huge unfilled territories. Behavior:</p>
+<ul>
+<li><strong>Magnet effect:</strong> price often returns to partially "rebalance" the void.</li>
+<li><strong>Corridor effect:</strong> while untouched, voids act as low-friction paths — price moves through them fast.</li>
+<li><strong>Trading use:</strong> after a fresh void forms, expect either a rebalancing pullback (entry opportunity at the void's origin) or continuation through it (target logic).</li>
+</ul>
+<h3>8.7 Stacking — Where Imbalances Become Fortresses</h3>
+<p>Single imbalances are decent. <strong>Stacked</strong> imbalances — FVG + volume imbalance + prior structure + OB all overlapping in one band — create the highest-conviction zones on the chart. Institutions defended that price band repeatedly; they'll defend it again.</p>
+<div class="drill"><b>Drill 7</b>Mark 10 FVGs on a historical chart. Before seeing the outcome, classify each: fresh/old, aligned/counter, discount/premium, displacement-origin or not. Then check: did your classification predict reaction vs pass-through? Tally your accuracy.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>FVG = 3-candle displacement scar; CE = the precision level.</li>
+<li>Quality matrix: fresh + aligned + correct half + displacement origin = entry zone.</li>
+<li>Broken FVGs invert (IFVG) — powerful LTF triggers.</li>
+<li>Stacked imbalances are the highest-conviction zones on any chart.</li>
+</ul></div>`,
+quiz:[
+ {q:"An FVG exists when:",o:["The market closes for the weekend","Candle 1's wick doesn't overlap candle 3's wick due to fast displacement","Volume spikes","Two candles share a high"],a:1,e:"The 3-candle structure leaves an unfilled band — one side was dominated."},
+ {q:"CE (consequent encroachment) is:",o:["The gap edge","The FVG's 50% midpoint — the precision entry","The sweep wick","A stop loss"],a:1,e:"CE rebalances the band — professionals limit-order there."},
+ {q:"A bearish FVG is broken with a strong displacement close above. On retest it now acts as:",o:["Strong support (IFVG flip)","Nothing","Guaranteed resistance","A BOS"],a:0,e:"Broken FVGs invert polarity — trapped orders fuel the reaction."},
+ {q:"Which FVG deserves an entry?",o:["Old, tested, counter-trend","Fresh, displacement-born, HTF-aligned, in discount (for longs)","One created by drifting candles","Any FVG"],a:1,e:"The quality matrix filters noise from institutional gaps."},
+ {q:"A liquidity void primarily acts as:",o:["A wall","A magnet for rebalancing and a low-friction corridor","Support always","Resistance always"],a:1,e:"Unfilled territory pulls price back (rebalance) or lets it fly (corridor)."}
+]},
+/* ============ LESSON 9 ============ */
+{id:9,phase:2,title:"Order Blocks — The Complete Masterclass",short:"Validity rules, the OB family, refinement, mitigation logic, ranking",
+body:`
+${mentor("The order block is the most famous SMC tool — and the most misused. Most traders draw rectangles on every red candle and wonder why they fail. Here is the rigorous version I actually trade.")}
+<h3>9.1 The Five Validity Requirements</h3>
+<ol>
+<li><strong>Last opposing candle:</strong> last down-close candle before an up-displacement (bullish OB); mirror for bearish.</li>
+<li><strong>Structure break:</strong> the displacement from the OB must cause a BOS or MSS. No structure break = just a candle.</li>
+<li><strong>Imbalance proof:</strong> the displacement should leave an FVG — urgency made visible.</li>
+<li><strong>Liquidity event (preferred):</strong> the OB forms at/on a sweep — the classic "sweep low then displace" bar.</li>
+<li><strong>Unmitigated:</strong> price hasn't returned yet. First touch = maximum strength.</li>
+</ol>
+<h3>9.2 The OB Family — Full Taxonomy</h3>
+<ul>
+<li><strong>Order Block:</strong> the standard — last opposing candle before structure-breaking displacement.</li>
+<li><strong>Breaker Block:</strong> an OB that <em>failed</em> (price displaced through it), later retested as the new-direction zone. Elite strength: trapped institutional positions must unwind there.</li>
+<li><strong>Mitigation Block:</strong> like a breaker but formed without a full structure break — price returns to "mitigate" the prior unbalanced move.</li>
+<li><strong>Propulsion Block:</strong> a candle that itself reacted from a prior OB — layered confluence showing repeated institutional interest at the same band.</li>
+<li><strong>Rejection Block (wick block):</strong> a long wick (often on a small body) that swept and rejected — trade the wick's origin zone.</li>
+</ul>
+<h3>9.3 Refinement — Where Exactly to Place Orders</h3>
+<p>A raw OB candle spans too wide a range; your RR dies inside it. Refine to:</p>
+<ul>
+<li><strong>Mean threshold:</strong> the OB's 50% level — the default professional entry.</li>
+<li><strong>The wick zone:</strong> the extreme 20–30% of the OB where true resting orders sat.</li>
+<li><strong>OB ∩ FVG overlap:</strong> when an FVG sits inside the OB, that overlap is the sniper zone — two institutional signatures in one band.</li>
+</ul>
+<div class="diagram"><svg viewBox="0 0 720 340">
+<rect x="80" y="170" width="55" height="95" fill="rgba(239,83,80,0.25)" stroke="#ef5350" stroke-width="2"/>
+<line x1="80" y1="217" x2="135" y2="217" stroke="#e8b73a" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="55" y="285" fill="#ef5350" font-family="monospace" font-size="12">Bullish OB (last down candle)</text>
+<text x="140" y="222" fill="#e8b73a" font-family="monospace" font-size="11">mean threshold</text>
+<rect x="145" y="150" width="110" height="42" fill="rgba(38,198,162,0.15)" stroke="#26c6a2" stroke-dasharray="4 3"/>
+<text x="150" y="200" fill="#26c6a2" font-family="monospace" font-size="12">FVG left by displacement</text>
+<path d="M80,210 L215,60 L275,110 L345,180 L435,50 L515,105 L605,25" fill="none" stroke="#26a69a" stroke-width="2.5"/>
+<text x="235" y="55" fill="#26c6a2" font-family="monospace" font-size="12">Displacement + BOS</text>
+<text x="320" y="205" fill="#e8b73a" font-family="monospace" font-size="12">Return = mitigation → entry at OB∩FVG</text>
+</svg><figcaption>Fig 9.1 — Valid OB: last opposing candle, displaced with BOS + FVG, then mitigated at the refined overlap.</figcaption></div>
+<h3>9.4 Mitigation Logic — Why OBs Actually Work</h3>
+<p>Institutions return to <strong>mitigate</strong>: close out remaining unfilled orders, add to positions, or exit losers at their original fill zone. An OB works because it is <em>unfinished institutional business</em>, not magic. Corollary: if price sits at the OB for many candles chopping through it, the business may already be complete — the zone is dying. Sharp reaction = business being conducted; slow chop = empty office.</p>
+<h3>9.5 OB Ranking — The Priority Algorithm</h3>
+<ol>
+<li><strong>Timeframe:</strong> Daily/4H OBs outrank everything below.</li>
+<li><strong>Origin event:</strong> MSS-causing OBs > BOS-causing OBs > non-structural candles.</li>
+<li><strong>Liquidity:</strong> OBs born at sweeps > plain OBs.</li>
+<li><strong>Location:</strong> discount OBs for longs / premium for shorts > counter-range.</li>
+<li><strong>Freshness:</strong> first unmitigated OB in the leg > older tested ones.</li>
+<li><strong>Stacking:</strong> OB + FVG overlap > either alone.</li>
+</ol>
+<h3>9.6 Common OB Mistakes (Eliminate These)</h3>
+<div class="mistake"><b>Mistake Vault</b>
+<ul>
+<li>Marking every opposite-color candle as an OB → 40 rectangles, zero edge.</li>
+<li>Using OBs that never broke structure → no institutional proof.</li>
+<li>Entering at the OB's top edge instead of refined levels → terrible RR.</li>
+<li>Trading mitigated-to-death OBs → the business is finished.</li>
+<li>Ignoring location: a "perfect" OB in premium is still a bad long.</li>
+</ul></div>
+<div class="drill"><b>Drill 8</b>On 15 historical moves, mark candidate OBs using the 5 validity rules. For each valid OB, note: did the mean-threshold entry reach TP1? Build your personal OB statistics before risking a cent.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Valid OB = last opposing candle + structure break + imbalance, ideally at a sweep, unmitigated.</li>
+<li>Breakers (failed OBs retested) are elite reversal zones — trapped fuel.</li>
+<li>Refine to mean threshold / wick zone / OB∩FVG overlap.</li>
+<li>Rank by TF, origin event, liquidity, location, freshness, stacking.</li>
+</ul></div>`,
+quiz:[
+ {q:"A candle qualifies as a valid OB only if its displacement:",o:["Is longer than 10 candles","Breaks structure and ideally leaves an imbalance","Closes green","Occurs at NY open"],a:1,e:"No structure break = just a candle. Imbalance proves urgency."},
+ {q:"A breaker block is:",o:["A trendline break","A failed OB that flips into the retest zone for the opposite direction","An untested OB","A type of FVG"],a:1,e:"Failed OBs invert into breakers — trapped participants fuel the retest."},
+ {q:"The sniper refinement inside an OB is:",o:["The candle's open","The OB∩FVG overlap zone","Always the wick top","The candle's close"],a:1,e:"Two institutional signatures in one band = maximum precision."},
+ {q:"Price chops through your OB for many candles with no displacement. Reading:",o:["Aggressive defense","The mitigation business may be complete — zone is dying","Add size","Guaranteed bounce"],a:1,e:"Sharp reaction = business; slow chop = empty office."},
+ {q:"Which OB is strongest?",o:["5m OB in premium","Daily MSS-causing sweep OB, unmitigated, in discount","A tested 15m OB mid-range","Any OB with a big candle"],a:1,e:"HTF + MSS origin + sweep + fresh + correct location = the full stack."}
+]},
+/* ============ LESSON 10 ============ */
+{id:10,phase:2,title:"Premium, Discount, Dealing Ranges & OTE",short:"Location mathematics and the institutional retracement band",
+body:`
+${mentor("Location is half of every trade. A perfect zone in the wrong half of the range is still a bad trade. This lesson gives you the exact mathematics professionals use to judge location.")}
+<h3>10.1 The Dealing Range — Definition and Construction</h3>
+<p>A <strong>dealing range</strong> is the leg between the last <em>significant</em> swing low and swing high. Construction rules:</p>
+<ul>
+<li>In an uptrend: range = last significant HL (low) → current HH (high).</li>
+<li>Anchor from <strong>wick extremes</strong>, not bodies.</li>
+<li>Rebuild the range after each new MSS — the active range always reflects the current market regime.</li>
+</ul>
+<h3>10.2 The Three Zones</h3>
+<div class="diagram"><svg viewBox="0 0 700 320">
+<rect x="80" y="40" width="500" height="220" fill="rgba(91,141,239,0.06)" stroke="#5b8def"/>
+<rect x="80" y="40" width="500" height="110" fill="rgba(239,83,80,0.08)"/>
+<rect x="80" y="150" width="500" height="110" fill="rgba(38,198,162,0.08)"/>
+<line x1="80" y1="150" x2="580" y2="150" stroke="#e8b73a" stroke-dasharray="7 4" stroke-width="1.5"/>
+<text x="245" y="90" fill="#ef5350" font-family="monospace" font-size="14">PREMIUM — smart money SELLS here</text>
+<text x="280" y="143" fill="#e8b73a" font-family="monospace" font-size="13">EQUILIBRIUM (50%)</text>
+<text x="250" y="210" fill="#26c6a2" font-family="monospace" font-size="14">DISCOUNT — smart money BUYS here</text>
+<path d="M100,255 L200,55 L280,185 L360,115 L440,225 L520,155 L575,65" fill="none" stroke="#26a69a" stroke-width="2.5"/>
+<text x="95" y="285" fill="#8a94ab" font-size="11" font-family="monospace">Range anchored: wick low → wick high. Buys live below the line; sells above it.</text>
+</svg><figcaption>Fig 10.1 — The dealing range split. Direction first, location second, zone third.</figcaption></div>
+<ul>
+<li><strong>Discount (below 50%):</strong> where institutions accumulate for longs.</li>
+<li><strong>Equilibrium (50%):</strong> balance — usually chop; no edge.</li>
+<li><strong>Premium (above 50%):</strong> where institutions distribute/exits occur.</li>
+</ul>
+<h3>10.3 OTE — Optimal Trade Entry</h3>
+<p>The <strong>OTE zone</strong> is the 62–79% retracement of an impulsive leg (fib 0.618–0.79, centered ~0.705). Why it works:</p>
+<ul>
+<li>It's the deep-discount portion of the current leg — wholesale pricing.</li>
+<li>It frequently coincides with the OB and FVG created by the displacement itself — stacking by construction.</li>
+<li>Institutions completing fills in the origin zone naturally defend this band.</li>
+</ul>
+<h3>10.4 The Fibonacci Detail Most Traders Miss</h3>
+<p>Anchor fibs from the <strong>sweep extreme to the displacement high/low</strong> — not the obvious body swing. After a sweep, the impulse begins at the harvested extreme; the retracement then lands on institutional fill territory, not retail's numbers.</p>
+<h3>10.5 Premium/Discount Discipline Rules</h3>
+<ul>
+<li>Never buy in premium; never sell in discount of the active range — regardless of how pretty the zone is.</li>
+<li>Deep discount + HTF-aligned POI + sweep = the trifecta of location.</li>
+<li>When price reaches premium in an uptrend, you are in <em>target</em> territory, not entry territory — manage/trail, don't initiate.</li>
+</ul>
+<div class="drill"><b>Drill 9</b>On 10 historical legs, draw the dealing range, mark OTE, and mark where the OB/FVG stack sat. Note how often OTE, OB and FVG converge. That convergence frequency is why the model works.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Dealing range from wick extremes; rebuild after each MSS.</li>
+<li>Buys in discount, sells in premium — no exceptions for pretty zones.</li>
+<li>OTE = 62–79% retracement, anchored from sweep extremes.</li>
+</ul></div>`,
+quiz:[
+ {q:"In an uptrend's dealing range, longs belong:",o:["In premium","In discount, ideally the 62–79% OTE band","At equilibrium","Anywhere with a green candle"],a:1,e:"Buy wholesale; OTE is the institutional retracement band."},
+ {q:"Fibs should be anchored from:",o:["Any visible swing","The sweep extreme to the displacement extreme","Body to body only","The indicator"],a:1,e:"Sweep-to-impulse anchoring lands fibs on institutional fill zones."},
+ {q:"Price enters premium during your uptrend. You should:",o:["Find new longs there","Treat it as target territory — manage/trail, not initiate","Short immediately always","Double long"],a:1,e:"Premium = distribution zone; professionals take profit, they don't initiate."}
+]},
+/* ============ LESSON 11 ============ */
+{id:11,phase:2,title:"POI Hierarchy & Zone Prioritization",short:"Deciding which zone holds when five overlap",
+body:`
+${mentor("Knowing zone types is entry-level. The professional skill is prioritization — when five zones stack in the same region, which one holds? Here's the framework I use every session.")}
+<h3>11.1 The Composite Zone Strength Ranking</h3>
+<ol>
+<li><strong>HTF origin:</strong> a Daily/4H OB outranks any 5m zone — the capital behind it is larger.</li>
+<li><strong>Origin event:</strong> zones born from MSS > zones from plain BOS > zones from drift.</li>
+<li><strong>Liquidity involvement:</strong> zones formed at sweeps > zones formed mid-range.</li>
+<li><strong>Stacking:</strong> OB + FVG + prior structure overlapping = exponentially stronger than any single zone.</li>
+<li><strong>Freshness:</strong> first touch beats every subsequent touch — each mitigation consumes orders.</li>
+<li><strong>Location:</strong> correct premium/discount half of the active range filters everything above.</li>
+</ol>
+<h3>11.2 The Location Lens Applied to Zones</h3>
+<p>A 9/10 bullish OB in <em>premium</em> is a worse trade than a 6/10 zone in deep discount. Apply location FIRST, then rank zones within the correct half. This single ordering habit eliminates half of all losing SMC trades.</p>
+<h3>11.3 Reading Mitigation Behavior — Zone Vital Signs</h3>
+<table><tr><th>Price behavior at zone</th><th>Diagnosis</th></tr>
+<tr><td>Sharp rejection + immediate displacement away</td><td>Live institutional zone — trade it</td></tr>
+<tr><td>Slow chop through the zone</td><td>Zone failing — no urgency present</td></tr>
+<tr><td>Deep wick through, close holds inside</td><td>Zone sweep — often still valid, sometimes stronger</td></tr>
+<tr><td>Full displacement close beyond</td><td>Zone invalidated — flip to IFVG/breaker logic</td></tr></table>
+<h3>11.4 Zone Conflict Resolution</h3>
+<p>When a bullish HTF zone and a bearish LTF zone overlap: <strong>HTF wins direction; LTF wins timing.</strong> Use the LTF zone only as an entry refinement inside the HTF decision — never as a standalone counter-HTF trade.</p>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Rank zones: TF > origin event > liquidity > stacking > freshness, filtered by location.</li>
+<li>Location before quality — always.</li>
+<li>Reaction character at the zone tells you whether institutions are home.</li>
+</ul></div>`,
+quiz:[
+ {q:"Which zone is strongest?",o:["A 1m FVG in premium","A Daily OB+FVG stack that caused an MSS, unmitigated, in discount","A thrice-tested 15m OB mid-range","A trendline touch"],a:1,e:"HTF + MSS + stacking + fresh + correct location = maximum strength."},
+ {q:"Price chops slowly through your bullish zone:",o:["Institutions defending it","Likely failing — no urgency present","Time to max size","Guaranteed bounce"],a:1,e:"Displacement defends zones; chop abandons them."},
+ {q:"HTF bullish zone and LTF bearish zone overlap. Correct handling:",o:["Short the LTF zone standalone","HTF wins direction; use the LTF zone only for entry timing within the HTF decision","Average both","Flip a coin"],a:1,e:"HTF owns direction; LTF owns timing — never inverted."}
+]},
+/* ============ LESSON 12 ============ */
+{id:12,phase:2,title:"Building the POI Map — The Daily Ritual",short:"Top-down workflow and the POI scorecard",
+body:`
+${mentor("Before every session I spend 20 minutes building a map. This ritual — not any single trade — is where my consistency comes from. Here is my exact process.")}
+<h3>12.1 The Top-Down Mapping Workflow</h3>
+<ol>
+<li><strong>Weekly/Daily (5 min):</strong> trend state, major pools (old week high/low, monthly extremes), the draw on liquidity, active dealing range.</li>
+<li><strong>4H/1H (8 min):</strong> refine POIs — unmitigated OBs/FVGs <em>in the HTF direction</em>, in the correct premium/discount half. Mark breakers and stacked zones.</li>
+<li><strong>15m/5m (5 min):</strong> mark inducement levels in front of each POI; note where LTF structure must shift (CHoCH) for entries; note session extremes.</li>
+<li><strong>Write the narrative (2 min):</strong> one paragraph — direction, magnet, entry conditions, invalidation. (Full template Lesson 17.)</li>
+</ol>
+<h3>12.2 The POI Scorecard</h3>
+<table><tr><th>Criterion</th><th>Points</th></tr>
+<tr><td>HTF (≥1H) origin</td><td>+2</td></tr>
+<tr><td>Cause an MSS</td><td>+2</td></tr>
+<tr><td>Born at a liquidity sweep</td><td>+2</td></tr>
+<tr><td>Stacked (OB+FVG overlap)</td><td>+2</td></tr>
+<tr><td>Unmitigated / fresh</td><td>+1</td></tr>
+<tr><td>Correct premium/discount half</td><td>+1</td></tr>
+<tr><td>Inducement already cleared</td><td>+1</td></tr></table>
+<p><strong>≥ 7 = A+ (full risk) · 5–6 = B (half risk) · ≤ 4 = skip.</strong></p>
+<h3>12.3 The Map's Real Purpose</h3>
+<p>The map converts the session from <em>reacting</em> to <em>waiting</em>. When price hits a mapped POI, you already know: is this an A+ zone, where's the inducement, what must the 5m do to confirm. Decisions made calmly in advance are the only decisions worth executing under pressure.</p>
+<div class="callout"><b>Gilbert's Habit</b>My mapped POIs live on my chart before London opens. If price arrives and the map says A+, I execute a prepared plan. If price does something unmapped, I do nothing. The map is my discipline enforcement device.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Map top-down daily: pools → POIs → inducement → narrative.</li>
+<li>Score POIs objectively; risk scales with the score.</li>
+<li>The map's purpose is pre-made decisions — discipline by design.</li>
+</ul></div>`,
+quiz:[
+ {q:"A POI scoring 8/11 with inducement cleared and an MSS at the zone is:",o:["A+ — execute the plan","Skip","Average","Counter-trend only"],a:0,e:"High score + cleared bait + MSS = full-plan execution conditions."},
+ {q:"The POI map's real purpose is:",o:["Decorating charts","Converting reactive guessing into pre-made decisions","Predicting exact prices","Avoiding all risk"],a:1,e:"Pre-made decisions under calm conditions = executable discipline."}
+]},
+/* ============ LESSON 13 ============ */
+{id:13,phase:2,title:"Advanced Structure — Failure Swings, SMT & Structure Traps",short:"Deep structure patterns that separate pros from intermediates",
+body:`
+${mentor("This lesson holds the structure concepts most courses skip entirely. These are the tools I use to filter trap setups — learn them well.")}
+<h3>13.1 Failure Swings (The Momentum Decay Pattern)</h3>
+<p>A <strong>failure swing</strong> occurs when price makes a higher high with <em>reduced displacement</em>, or an equal/lower high after a strong leg — momentum decay at the extreme. It signals the aggressive side is thinning out. Sequence: strong leg → weak retest of the high → failure to advance with energy → CHoCH risk rises dramatically. Failure swings at HTF extremes after liquidity sweeps are prime reversal precursors.</p>
+<h3>13.2 SMT Divergence (Smart Money Technique)</h3>
+<p>Correlated assets (e.g., EURUSD & GBPUSD, US30 & NAS100, BTC & ETH) normally move together. <strong>SMT divergence</strong> = one makes a new high while the correlated one fails to — at a key level:</p>
+<ul>
+<li>EURUSD sweeps its high; GBPUSD fails to make a new high → one pair's move is engineered to collect liquidity, not express conviction.</li>
+<li>SMT at a HTF POI + sweep = powerful reversal confluence.</li>
+<li>Use: confirmation filter, never a standalone signal.</li>
+</ul>
+<h3>13.3 Structure Traps — The Four Classic Deceptions</h3>
+<table><tr><th>Trap</th><th>Mechanism</th><th>Defense</th></tr>
+<tr><td>False CHoCH</td><td>Internal break mistaken for external reversal</td><td>Significance + displacement filters</td></tr>
+<tr><td>Sweep-disguised-as-breakout</td><td>Pierce without close-through</td><td>Close rule + reclaim check</td></tr>
+<tr><td>Displacement fakeout</td><td>One news candle breaks structure then reverses</td><td>Require 2+ candle sequence + FVG</td></tr>
+<tr><td>Inducement entry</td><td>First-pullback bait trade</td><td>IDM mapping + real-POI discipline</td></tr></table>
+<h3>13.4 Structure-Based Liquidity — Reading the Structure AS Liquidity</h3>
+<p>Advanced view: structural levels are simultaneously liquidity. The last HL isn't just "support" — it's where longs' stops rest (SSL). Every structural break is therefore a liquidity event. Once you see structure AS liquidity, the two subjects merge into one lens — this is the moment SMC becomes intuitive.</p>
+<div class="drill"><b>Drill 10</b>Find 5 historical SMT divergences between two correlated pairs at swing extremes. Check what followed. Then find 5 failure swings at HTF extremes and do the same. Log both hit rates.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Failure swings = momentum decay at extremes → reversal precursor.</li>
+<li>SMT divergence between correlated pairs = liquidity-event confirmation.</li>
+<li>Memorize the four structure traps and their defenses.</li>
+<li>Structure IS liquidity — the two lenses merge at mastery.</li>
+</ul></div>`,
+quiz:[
+ {q:"SMT divergence occurs when:",o:["RSI diverges from price","Correlated assets disagree at a level — one makes the extreme, the other doesn't","Volume diverges","Two brokers show different prices"],a:1,e:"One pair's move lacks correlated conviction = engineered liquidity event."},
+ {q:"A failure swing signals:",o:["Trend acceleration","Momentum decay at an extreme — rising reversal risk","Nothing","A BOS"],a:1,e:"Weak retest of the extreme = thinning aggression."},
+ {q:"Structure and liquidity, at mastery level, are:",o:["Separate subjects","Two views of the same phenomenon — structural levels ARE stop clusters","Incompatible","Only for scalpers"],a:1,e:"Every structural break is a liquidity event — one merged lens."}
+]},
+/* ============ LESSON 14 ============ */
+{id:14,phase:3,title:"Kill Zones, Sessions & the Judas Swing",short:"Time windows, AMD, session mechanics, day selection",
+body:`
+${mentor("Phase 4 — time. I can hand you perfect zones and perfect structure, but if you trade them at 11pm on dead volume, they fail. Time is the multiplier on everything you learned in Phases 1–3.")}
+<h3>14.1 The Kill Zones (all times in New York)</h3>
+<table><tr><th>Window</th><th>Time (NY)</th><th>Character</th></tr>
+<tr><td>Asian Range</td><td>20:00–00:00</td><td>Accumulation — builds the range whose extremes become London's targets</td></tr>
+<tr><td>London Kill Zone</td><td>02:00–05:00</td><td>Judas swing + first real expansion; consumes Asian liquidity</td></tr>
+<tr><td>NY Kill Zone</td><td>07:00–10:00</td><td>Second expansion — extends or reverses London's move</td></tr>
+<tr><td>London Close</td><td>10:00–12:00</td><td>Profit-taking, fades, consolidation — mostly management, not initiation</td></tr></table>
+<p><strong>Why these windows:</strong> this is when dealing desks are fully staffed and institutional flow peaks. Outside them, moves lack participation and sweeps have no follow-through. <em>No kill zone, no trade</em> is a rule that alone transforms losing records.</p>
+<h3>14.2 The Judas Swing — Session-Scale Inducement</h3>
+<p>Near a kill-zone open, price frequently makes a <strong>false push</strong>: a sharp move against the eventual daily direction that sweeps the Asian range's extremes, triggers breakout traders and stops, then reverses violently into the true direction. The Judas swing <em>is</em> the manipulation phase of the daily script. The play: wait for the sweep + LTF CHoCH, then trade the real direction — the crowd is already trapped on the wrong side as your fuel.</p>
+<div class="diagram"><svg viewBox="0 0 700 320">
+<path d="M30,160 L150,125 L250,135 L330,240 L400,115 L470,165 L560,60 L660,40" fill="none" stroke="#26a69a" stroke-width="2.5"/>
+<rect x="150" y="110" width="100" height="48" fill="none" stroke="#8a94ab" stroke-dasharray="5 4"/>
+<text x="120" y="100" fill="#8a94ab" font-family="monospace" font-size="12">Asian range</text>
+<text x="255" y="265" fill="#ef5350" font-family="monospace" font-size="12">Judas: sweeps Asian lows at London open</text>
+<text x="470" y="48" fill="#26c6a2" font-family="monospace" font-size="12">True daily direction (distribution)</text>
+<text x="40" y="305" fill="#8a94ab" font-size="11" font-family="monospace">A: quiet Asian range · M: the Judas sweep · D: the real expansion</text>
+</svg><figcaption>Fig 14.1 — The AMD script and the Judas swing at London open.</figcaption></div>
+<h3>14.3 Power of 3 (AMD) — The Daily Script</h3>
+<p>Each session/day tends to follow <strong>Accumulation → Manipulation → Distribution</strong>:</p>
+<ol>
+<li><strong>Accumulation:</strong> quiet range (often Asian) — liquidity builds at both extremes.</li>
+<li><strong>Manipulation:</strong> the false move (Judas) — one extreme is swept.</li>
+<li><strong>Distribution:</strong> the real expansion — in the OPPOSITE direction of the manipulation, toward the opposite pool/draw.</li>
+</ol>
+<p>Practical use: during the Asian range, note both extremes and your HTF draw. If the HTF draw is <em>above</em>, expect manipulation <em>below</em> (Judas down) then distribution up. You now know the day's likely script before it plays.</p>
+<h3>14.4 Day Selection & Skip Conditions</h3>
+<ul>
+<li><strong>Skip:</strong> major news days without clear post-news structure (first 30 min), bank holidays, dead-volume Fridays after mid-session, and consolidation weeks (Lesson 15).</li>
+<li><strong>Prioritize:</strong> days where the Asian range is clean, the HTF draw is obvious, and price sits near mapped POIs.</li>
+</ul>
+<div class="drill"><b>Drill 11</b>For 10 historical days, mark the Asian range, identify the Judas, and the distribution. Note: in how many did price sweep the extreme OPPOSITE the eventual daily direction? That statistic is why you'll stop fearing the opening spike against you.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Trade London and NY kill zones; everything else is context or noise.</li>
+<li>The Judas swing sweeps session liquidity before the true move — expect it, use it.</li>
+<li>AMD gives you the day's script: quiet → false move → real expansion.</li>
+<li>Skip conditions are as important as entry conditions.</li>
+</ul></div>`,
+quiz:[
+ {q:"The Judas swing is:",o:["The day's genuine trend","A false opening move harvesting session liquidity before the real direction","An Asian pattern","A fib level"],a:1,e:"It's the manipulation phase of AMD — engineered bait at session scale."},
+ {q:"AMD stands for:",o:["Average Moving Deviation","Accumulation, Manipulation, Distribution","Analysis, Management, Discipline","Asia, Dubai, Moscow"],a:1,e:"The daily script: quiet range, false move, real expansion."},
+ {q:"If the HTF draw sits ABOVE, expect the Judas to most likely:",o:["Rally first, then reverse down","Sweep DOWN (below the Asian range) then distribute up","Do nothing","Match the draw instantly"],a:1,e:"Manipulation goes opposite the draw — harvesting fuel first."},
+ {q:"Highest-probability SMC entries occur:",o:["Anytime price hits a zone","Inside kill zones with full confluence","Only Fridays","Outside sessions for quiet"],a:1,e:"Time filter + confluence separates professionals from hobbyists."}
+]},
+/* ============ LESSON 15 ============ */
+{id:15,phase:3,title:"Weekly Profiles & Higher-Timeframe Rhythm",short:"Weekly templates, day-of-week tendencies, gaps, max pain",
+body:`
+${mentor("Zoom out with me: weeks have personalities just like sessions. Reading the weekly rhythm means you anticipate the week's script before Monday opens — a massive contextual edge.")}
+<h3>15.1 Day-of-Week Tendencies</h3>
+<table><tr><th>Day</th><th>Tendency</th></tr>
+<tr><td>Monday</td><td>Range-setting / manipulation — the weekly Judas; often sweeps an extreme from last week</td></tr>
+<tr><td>Tuesday/Wednesday</td><td>Expansion — the true weekly direction most often expresses here</td></tr>
+<tr><td>Thursday</td><td>Continuation, or the weekly high/low prints</td></tr>
+<tr><td>Friday</td><td>Distribution — profit-taking, sweeps of weekly extremes into the close, then flat</td></tr></table>
+<h3>15.2 Weekly Profile Templates</h3>
+<ol>
+<li><strong>Bullish expansion week:</strong> Monday range → Tue/Wed displacement up → Thursday retest of a 4H POI → Friday grind higher into the weekly draw.</li>
+<li><strong>Reversal week:</strong> Monday sweeps last week's low (weekly Judas), displaces up with a Daily MSS — trade the reversal days midweek.</li>
+<li><strong>Consolidation week:</strong> price orbits the weekly equilibrium, no displacement. <em>Professional response: reduced activity, tiny size, or nothing.</em> Ranges kill SMC entries.</li>
+</ol>
+<h3>15.3 Weekly Opening Gaps & Max Pain</h3>
+<ul>
+<li><strong>Weekend gaps</strong> (indices/crypto) tend to partially fill — the gap fill frequently IS the Monday Judas.</li>
+<li><strong>Max pain logic:</strong> price tends to travel toward the point that hurts the maximum number of participants — usually the week's largest unswept liquidity pool. Map the pools Monday; the week's direction often = the biggest pool's direction.</li>
+</ul>
+<h3>15.4 Monthly & Quarterly Context (Advanced)</h3>
+<ul>
+<li><strong>Monthly extremes</strong> hold the largest institutional stops — sweeps of them can mark multi-week reversals.</li>
+<li><strong>Quarter-end flows</strong> (fund rebalancing, especially March/June/Sept/Dec) create anomalous reversals around month boundaries.</li>
+<li>Use monthly premium/discount to frame which weekly profile is even likely.</li>
+</ul>
+<div class="drill"><b>Drill 12</b>Review 8 historical weeks. Classify each into the three templates. Note which day held the weekly extreme. Build your personal day-of-week statistics for your pair.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Monday manipulates; midweek expands; Friday distributes.</li>
+<li>Consolidation weeks = reduced activity by design.</li>
+<li>Gap fills and weekly extremes are the week's prime liquidity targets.</li>
+</ul></div>`,
+quiz:[
+ {q:"Monday most often functions as:",o:["Main expansion day","The weekly manipulation/range-setting day","A non-trading day","Always a reversal day"],a:1,e:"Monday sets the range the rest of the week trades against."},
+ {q:"During a consolidation week the professional response is:",o:["Trade every internal CHoCH","Reduce activity — ranges degrade SMC entries","Maximize size","Short only"],a:1,e:"No displacement = no institutional intent = no edge."},
+ {q:"'Max pain' logic says price gravitates toward:",o:["The round number","The point hurting the most participants — usually the biggest unswept pool","The moving average","Last month's close"],a:1,e:"Largest pool = strongest magnet; the week often resolves toward it."}
+]},
+/* ============ LESSON 16 ============ */
+{id:16,phase:3,title:"HTF Narrative & Draw on Liquidity",short:"Forming institutional bias and writing the daily plan",
+body:`
+${mentor("This is where everything fuses. A narrative is your directional thesis — written BEFORE the session, with invalidation predefined. Amateurs form opinions during the session; professionals form them before it.")}
+<h3>16.1 The Five Narrative Questions (Always in This Order)</h3>
+<ol>
+<li><strong>Where is the draw on liquidity?</strong> The nearest significant HTF pool price is being pulled toward. This defines <em>direction</em>.</li>
+<li><strong>What is the HTF structure state?</strong> BOS sequence direction, last MSS, trend phase (accumulation/distribution).</li>
+<li><strong>Where is price in the dealing range?</strong> Premium/discount relative to that draw — defines whether we're in entry or target territory.</li>
+<li><strong>Which POIs sit between here and the draw?</strong> Your entry candidates, with their scorecard values.</li>
+<li><strong>What session windows apply today?</strong> And any news that rewrites the schedule.</li>
+</ol>
+<h3>16.2 A Complete Narrative — Fully Assembled</h3>
+<div class="callout"><b>Gilbert's Actual Pre-Session Narrative</b>"Daily is bullish — sequence of HH/HL, last BOS Monday with displacement. <strong>Draw on liquidity:</strong> last week's high, above. Price retraced into 4H discount, sweeping Monday's low (SSL) at an unmitigated 4H OB (scorecard 9). Inducement at the 15m level cleared at 03:30 London. <strong>Plan:</strong> await 5m CHoCH + FVG after the sweep; long at FVG-CE; stop below the sweep wick; TP1 at 4H equilibrium (50% off, BE); TP2 at the weekly high. <strong>Invalidation:</strong> 5m close below the sweep low, or failure to react at the OB." — Every element traces to a specific earlier lesson. THIS is what a complete narrative looks like.</div>
+<h3>16.3 Narrative Invalidation — The Mechanical Kill Switch</h3>
+<p>A narrative is a thesis, not a religion. Define <em>in advance</em> what kills it:</p>
+<ul>
+<li>A body close beyond a specific structural level.</li>
+<li>Failure to react at the POI (chop through instead of displacement).</li>
+<li>Displacement in the opposite direction before your conditions trigger.</li>
+</ul>
+<p>When invalidation hits: the narrative resets, and you re-run the five questions. No averaging, no hope, no "it'll come back."</p>
+<h3>16.4 Narrative Upgrades and Downgrades</h3>
+<p>Bias has strength levels: <strong>Strong</strong> (HTF BOS + aligned draw + price in discount) → standard risk. <strong>Mixed</strong> (structure and draw disagree, or mid-range) → half risk or stand aside. <strong>Conflicted</strong> (both sides' pools equally near, chop) → no trade. Grading your own bias is as important as grading setups.</p>
+<div class="drill"><b>Drill 13</b>For 5 historical days, write the full 5-question narrative BEFORE seeing the outcome (replay to a point, then freeze). Grade your own bias strength. Check the day's resolution. This drill builds the pre-session muscle.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Bias = draw on liquidity + HTF structure + location in the range.</li>
+<li>Write the narrative before the session; trade only inside it.</li>
+<li>Predefine invalidation — narratives die mechanically, never emotionally.</li>
+<li>Grade bias strength and size accordingly.</li>
+</ul></div>`,
+quiz:[
+ {q:"The draw on liquidity is:",o:["The current price","The magnet pool price gravitates toward — the basis of directional bias","Your entry","The stop"],a:1,e:"It defines direction: price travels toward significant resting liquidity."},
+ {q:"A narrative dies when:",o:["You feel uncertain","Its predefined invalidation triggers","One wick goes against it briefly","Someone disagrees online"],a:1,e:"Mechanical invalidation kills bias-holding emotion."},
+ {q:"When structure and draw disagree (mixed bias), you should:",o:["Full risk","Half risk or stand aside","Maximum size","Reverse constantly"],a:1,e:"Bias strength grades risk — mixed bias = reduced exposure."}
+]},
+/* ============ LESSON 17 ============ */
+{id:17,phase:4,title:"The Confluence Stack & Setup Grading",short:"The 7-layer professional checklist and risk-scaling by grade",
+body:`
+${mentor("Individually, every concept so far is roughly a coin flip. Stacked, they compound into genuine edge.")}
+  <h3>17.1 The 7-Layer Stack (all must align for A+)</h3>
+<ol>
+<li><strong>HTF bias</strong> — draw on liquidity direction (Lesson 16).</li>
+<li><strong>Location</strong> — discount for longs / premium for shorts (Lesson 10).</li>
+<li><strong>HTF POI</strong> — unmitigated OB/FVG stack, scorecard ≥ 7 (Lessons 9–12).</li>
+<li><strong>Liquidity event</strong> — sweep of inducement or structural/session liquidity (Lessons 6–7).</li>
+<li><strong>Displacement + structure shift</strong> — LTF MSS confirming the reaction (Lesson 3).</li>
+<li><strong>Entry refinement</strong> — FVG/CE or OB∩FVG overlap (Lesson 8).</li>
+<li><strong>Time</strong> — inside a kill zone (Lesson 14).</li>
+</ol>
+<h3>17.2 Grading Setups and Scaling Risk</h3>
+<table><tr><th>Grade</th><th>Layers present</th><th>Risk</th></tr>
+<tr><td>A+</td><td>7/7</td><td>Full standard risk (1%)</td></tr>
+<tr><td>B</td><td>5–6</td><td>Half risk (0.5%)</td></tr>
+<tr><td>C</td><td>3–4</td><td>Skip or micro-size</td></tr>
+<tr><td>D</td><td>≤2</td><td>Never</td></tr></table>
+<div class="callout"><b>Gilbert's Math</b>Expected value = win rate × reward − loss rate × risk. A+ setups push win rate high enough that even 1:2 RR compounds cleanly. C setups at the same RR are mathematically negative. <em>Grading is the risk management that happens before the trade.</em></div>
+<h3>17.3 Using the Stack as a Filter, Not a Score-Fluffer</h3>
+<p>The layers are <em>independent evidence</em>. If two layers are actually the same signal counted twice (e.g., "sweep" and "inducement sweep" on the same wick), you don't have two layers. Be brutally honest — the stack only protects you if it's real.</p>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Seven layers, one checklist, zero improvisation.</li>
+<li>Risk size scales with grade — grading is pre-trade risk management.</li>
+<li>No double-counting: layers must be independent evidence.</li>
+</ul></div>`,
+quiz:[
+ {q:"How many confluence layers define an A+ setup?",o:["2","3","5","7/7"],a:3,e:"All seven: bias, location, POI, sweep, MSS, refinement, timing."},
+ {q:"A 4-layer setup should be:",o:["Full risk","Skipped or micro-sized","Doubled down","Traded at full size with a tight stop"],a:1,e:"C-grade setups carry negative expectancy at standard risk."},
+ {q:"Counting 'inducement sweep' and 'sweep' from the same wick as two layers is:",o:["Good confluence","Double-counting — layers must be independent evidence","Advanced technique","Fine if you're confident"],a:1,e:"Honest grading is what makes the stack protective."}
+]},
+/* ============ LESSON 18 ============ */
+{id:18,phase:4,title:"Entry Models — The Complete Playbook",short:"Every SMC entry, step by step, with stop logic",
+body:`
+${mentor("Here is my full arsenal. Each model assumes the confluence stack is already present — entries are the LAST decision, never the first. Beginners pick entries; professionals pick conditions.")}
+<h3>18.1 Model A: Sweep → MSS → FVG (the flagship)</h3>
+<ol>
+<li>HTF POI is hit; a sweep of inducement/structural liquidity occurs.</li>
+<li>On LTF, displacement creates an MSS in the trade direction.</li>
+<li>Enter at the FVG (or CE) formed by that displacement leg.</li>
+<li>Stop below the sweep wick extreme. Target: opposing liquidity pool.</li>
+</ol>
+<h3>18.2 Model B: Breaker Retest</h3>
+<ol>
+<li>An OB fails; price displaces through it (MSS opposite).</li>
+<li>Wait for the retest of the failed OB (now a breaker).</li>
+<li>Enter at the breaker with LTF confirmation; stop beyond the breaker's origin wick.</li>
+</ol>
+<h3>18.3 Model C: IFVG Entry</h3>
+<ol>
+<li>A previous FVG is invalidated with displacement.</li>
+<li>On retest of the inverted gap, enter with the new displacement direction.</li>
+<li>Stop beyond the IFVG's far edge.</li>
+</ol>
+<h3>18.4 Model D: Straight Displacement</h3>
+<ol>
+<li>No pullback offered — price displaces violently from the POI.</li>
+<li>Enter on the first minor LTF FVG formed inside the displacement, or at the displacement candle's origin.</li>
+<li>Wider stop → smaller size. This model has no second chance.</li>
+</ol>
+<h3>18.5 Limit vs Confirmation Entries</h3>
+<table><tr><th>Type</th><th>Pros</th><th>Cons</th></tr>
+<tr><td>Limit (set at CE/OB, walk away)</td><td>Best RR, no screen addiction, no emotional interference</td><td>No confirmation — zone may fail</td></tr>
+<tr><td>Confirmation (wait for LTF MSS)</td><td>Higher win rate, structural proof</td><td>Worse RR, may miss the move entirely</td></tr></table>
+<p><strong>Professional default:</strong> limit entries at A+ zones only; confirmation entries for B-grade zones.</p>
+<h3>18.6 Execution Protocol (identical every time)</h3>
+<ol>
+<li>Confirm all stack layers live, in real time, on the checklist.</li>
+<li>Pre-set entry, stop, TP1, TP2 and size BEFORE price reaches the zone.</li>
+<li>Place the order; set the stop; walk away or watch without touching.</li>
+<li>No mid-trade modifications except the predefined management plan (Lesson 20).</li>
+</ol>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Four models cover every SMC scenario — choose by price behavior, not preference.</li>
+<li>Confirmation for marginal zones, limits for elite zones.</li>
+<li>Stops behind structural invalidation, never arbitrary pips.</li>
+<li>Pre-set everything before arrival; execute without improvisation.</li>
+</ul></div>`,
+quiz:[
+ {q:"In the flagship model, the stop goes:",o:["Fixed 20 pips","Below the sweep wick extreme — structural invalidation","At the FVG edge","Wherever feels right"],a:1,e:"If the sweep extreme breaks, the idea is objectively dead."},
+ {q:"Confirmation entries are best for:",o:["A+ zones","B-grade zones where structural proof matters","Never","Scalping only"],a:1,e:"Elite zones tolerate limit entries; weaker zones need proof."},
+ {q:"Model D's wider stop requires:",o:["Same size","Smaller size to normalize risk","Bigger size","No stop at all"],a:1,e:"Size must scale inversely with stop distance to keep risk constant."},
+ {q:"Entries are chosen:",o:["First, then a story is built around them","Last — after the confluence stack confirms conditions","By indicators","Randomly"],a:1,e:"Professionals pick conditions first; entries are the final mechanical step."}
+]},
+/* ============ LESSON 19 ============ */
+{id:19,phase:4,title:"Stops, Targets & Trade Management",short:"Logical invalidation, partials, RR mathematics",
+body:`
+${mentor("Entry gets you into the game; management decides whether you survive it. Most of my improvement over the years came from this lesson's content, not from better entries.")}
+<h3>19.1 Logical Stops — The Invalidation Principle</h3>
+<p>Your stop is not a number — it is the price where <strong>your idea is proven wrong</strong>. Below the sweep wick, beyond the OB's origin, past the structural point whose break kills the narrative. If you cannot name <em>why</em> the stop exists, the trade is a guess.</p>
+<ul>
+<li>Place stops at <strong>wick extremes + small buffer</strong>, never exactly at the level (memory: sweeps overshoot).</li>
+<li>Never widen a stop. Ever. Widening = converting a defined-risk trade into a hope position.</li>
+</ul>
+<h3>19.2 Targets — Liquidity-Based</h3>
+<ol>
+<li><strong>TP1:</strong> nearest opposing liquidity (internal highs/lows, session extremes, equilibrium).</li>
+<li><strong>TP2:</strong> the HTF draw on liquidity (weekly high/low, major EQH/EQL).</li>
+<li>Never target <em>into</em> premium (for longs) — take profit <em>as</em> premium begins.</li>
+</ol>
+<h3>19.3 Partial Structure — The Default Template</h3>
+<p>50% off at TP1 → stop to break-even → trail the remainder via LTF structure (below each new HL for longs) to TP2. This produces a positively skewed distribution: small losses, scratch trades, occasional runners. That skew is what makes the equity curve smooth.</p>
+<h3>19.4 The RR Mathematics — Be Brutally Honest</h3>
+<table><tr><th>Planned RR</th><th>Break-even win rate</th><th>Realistic A+ win rate</th><th>Edge</th></tr>
+<tr><td>1:1</td><td>50%</td><td>~55–65%</td><td>Thin</td></tr>
+<tr><td>1:2</td><td>33.3%</td><td>~45–55%</td><td>Solid</td></tr>
+<tr><td>1:3</td><td>25%</td><td>~35–45%</td><td>Strong</td></tr></table>
+<p><strong>Do not compress RR to chase win rate</strong> — the math inverts and one bad month erases three good ones. The band between break-even rate and your realistic rate IS your entire business.</p>
+<div class="drill"><b>Drill 14</b>Take 20 of your backtested trades (or historical setups). For each, write the invalidation point BEFORE checking the outcome. Measure: how often did invalidation hold vs the arbitrary "20-pip" alternative?</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Stops = invalidation points at wick extremes + buffer; never widened.</li>
+<li>Targets = opposing liquidity, capped at premium/discount boundaries.</li>
+<li>50% partial + BE + structure trail is the default template.</li>
+<li>Your business lives in the gap between break-even win rate and real win rate.</li>
+</ul></div>`,
+quiz:[
+ {q:"Targets should be placed:",o:["At round numbers","At opposing liquidity pools, respecting premium/discount","Always 1:1","Where the indicator says"],a:1,e:"Liquidity is where price actually travels."},
+ {q:"The purpose of 50% at TP1 + BE is:",o:["Guaranteed profit","Positive skew — small losses, occasional runners","Showing off","Taxes"],a:1,e:"It reshapes the loss distribution — the core of surviving drawdowns."},
+ {q:"Price re-enters your FVG and closes through it. Correct action:",o:["Hold and hope","Exit at the level — invalidation occurred; the stop is only insurance","Average down","Move the stop"],a:1,e:"Exit at invalidation mechanically; stops cover gaps/spikes beyond it."}
+]},
+/* ============ LESSON 20 ============ */
+{id:20,phase:4,title:"Advanced Trade Management & Multi-Position Scenarios",short:"Trailing, scaling, holding runners, partial failures",
+body:`
+${mentor("Beyond the default template lies the art of managing positions through live narrative updates. This is where experienced traders extract the extra R that intermediates leave on the table.")}
+<h3>20.1 Trailing by Structure (Not by Pips)</h3>
+<p>Trail your stop behind each newly confirmed <strong>protected HL/LH</strong> on the LTF. Rules:</p>
+<ul>
+<li>Only trail after a new swing confirms (close-validated).</li>
+<li>Trail to just beyond the last protected swing's wick.</li>
+<li>Stop trailing into premium (longs) — that's where reactions happen; tighten instead.</li>
+</ul>
+<h3>20.2 Scaling In — The Legitimate Method</h3>
+<p>Adding is only valid when a <em>new</em> independent confluence layer appears: e.g., initial position at the OB, add at the IFVG retest, add at the next kill zone with a fresh MSS. Each add must have its own stop and its own thesis. <strong>Adding to average a loser is never legitimate — it's two mistakes stacked.</strong></p>
+<h3>20.3 Holding Runners — The Narrative Test</h3>
+<p>Hold part of the position only while the narrative remains intact: draw not yet reached, structure unbroken, displacement still directional. The moment the draw is tagged or a counter-MSS prints — the runner is done, regardless of greed.</p>
+<h3>20.4 Partial Failure Scenarios</h3>
+<table><tr><th>Scenario</th><th>Response</th></tr>
+<tr><td>TP1 hit, then price reverses to BE stop</td><td>Normal business — a scratch. Journal it without emotion.</td></tr>
+<tr><td>Price stalls mid-leg beyond TP1</td><td>Tighten trail to last internal swing; protect profits.</td></tr>
+<tr><td>Displacement against you before TP1</td><td>Exit at the first counter-structure break — don't wait for the stop.</td></tr>
+<tr><td>News spike through your stop</td><td>Slippage happens. Position sizing exists so it doesn't matter.</td></tr></table>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Trail structure, not pips; stop trailing into premium/discount extremes.</li>
+<li>Adds require new independent confluence with their own stops.</li>
+<li>Runners live only while the narrative is alive.</li>
+<li>Exit at counter-structure breaks before the stop is forced.</li>
+</ul></div>`,
+quiz:[
+ {q:"Legitimate scaling in requires:",o:["Adding to losers to average","A new independent confluence event with its own stop","Adding every candle","Doubling after a loss"],a:1,e:"Each add needs its own thesis and risk — never averaging losers."},
+ {q:"A runner should be closed when:",o:["You feel nervous","The draw is tagged or a counter-MSS prints","After 5 minutes","It never should be"],a:1,e:"Runners live exactly as long as the narrative that justified them."},
+ {q:"Trailing stops should follow:",o:["Fixed pip distances","Each newly confirmed protected swing on the LTF","Your emotions","The indicator"],a:1,e:"Structure-based trailing keeps the stop behind institutional defenses."}
+]},
+/* ============ LESSON 21 ============ */
+{id:21,phase:5,title:"Risk Management — The Full System",short:"Sizing math, drawdown protocol, correlation, survival math",
+body:`
+${mentor("Risk management is the only module that GUARANTEES improvement, because it removes the failure modes no strategy can survive. I consider this the most valuable lesson in the course.")}
+<h3>21.1 Position Sizing — The Exact Formula</h3>
+<p><code>Position size = (Account × Risk%) ÷ (Stop distance × value per pip/point)</code></p>
+<ul>
+<li>1% per A+ trade; 0.5% per B trade; 0% for C/D.</li>
+<li>Size is computed <em>from the stop distance</em> — never from a desired profit.</li>
+<li>Example: $10,000 account, 1% risk ($100), 25-pip stop, $10/pip per lot → 0.4 lots.</li>
+</ul>
+<h3>21.2 The Drawdown Protocol (Hard-Coded)</h3>
+<table><tr><th>Drawdown</th><th>Mandatory Action</th></tr>
+<tr><td>−3% in a week</td><td>Half size until recovered</td></tr>
+<tr><td>−5%</td><td>Quarter size + mandatory journal review</td></tr>
+<tr><td>−8%</td><td>Stop live trading; backtest/demo until 20 clean B+ setups logged</td></tr>
+<tr><td>−10%</td><td>Full strategy review — the edge itself is in question</td></tr></table>
+<p>The ladder is mechanical, written, and non-negotiable. It interrupts the revenge spiral at the exact moment willpower fails.</p>
+<h3>21.3 Correlated Risk</h3>
+<p>Three USD-pair longs = <em>one</em> 3% risk, not three independent 1% risks. Correlated positions share a single thesis; size them as one combined exposure. Same for EURUSD + GBPUSD shorts into one USD-strength idea.</p>
+<h3>21.4 Survival Mathematics</h3>
+<table><tr><th>Risk per trade</th><th>10-loss streak damage</th><th>Recovery needed</th></tr>
+<tr><td>1%</td><td>−9.6%</td><td>+10.6%</td><td></td></tr>
+<tr><td>3%</td><td>−26%</td><td>+35%</td></tr>
+<tr><td>5%</td><td>−40%</td><td>+67%</td></tr>
+<tr><td>10%</td><td>−65%</td><td>+186%</td></tr></table>
+<p>10 consecutive losses is a NORMAL bad streak for a 45% win-rate system. At 1% risk you survive it comfortably; at 5% you are mathematically finished. <strong>Survival is the first edge.</strong></p>
+<h3>21.5 Risk of Ruin — The Formula Behind It</h3>
+<p>Risk of ruin rises explosively as risk-per-trade grows beyond ~2% for realistic win rates. This is why prop firms cap daily loss limits — they're enforcing survival math on traders who ignore it.</p>
+<div class="drill"><b>Drill 15</b>Compute your exact lot size formula for your account, your pair, and a 1% risk at three different stop distances. Write the three numbers on a card. Execution under pressure should require zero arithmetic.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>Size from stop distance; 1% A+, 0.5% B, 0% C/D.</li>
+<li>Hard-coded drawdown ladders prevent revenge spirals.</li>
+<li>Correlated positions are one bet.</li>
+<li>Survival math: 1% risk survives normal streaks; 5% does not.</li>
+</ul></div>`,
+quiz:[
+ {q:"Three correlated USD longs at 1% each represent:",o:["3% risk on one thesis","Safe diversification","Three independent trades","No added risk"],a:0,e:"Correlated trades share one outcome — combined exposure."},
+ {q:"After a −5% drawdown the protocol requires:",o:["Double size to recover","Quarter size + journal review","Business as usual","Quitting forever"],a:1,e:"De-escalation ladders interrupt revenge spirals mechanically."},
+ {q:"Why is 1% risk 'survival math'?",o:["It's a broker rule","A normal 10-loss streak costs under 10% — fully recoverable","It maximizes profits","It's fashionable"],a:1,e:"Surviving normal variance is the precondition for any edge playing out."}
+]},
+/* ============ LESSON 22 ============ */
+{id:22,phase:5,title:"Backtesting & Building Your Sample Size",short:"The replay protocol, expectancy, journaling as a feedback loop",
+body:`
+${mentor("You cannot trade an edge you haven't measured. Backtesting converts belief into data — and it's where I spent hundreds of hours before my consistency appeared. This is the proof engine of the entire course.")}
+<h3>22.1 The Backtest Protocol</h3>
+<ol>
+<li><strong>Pick ONE model</strong> — start with Model A (Lesson 18). One variable at a time.</li>
+<li><strong>Replay 200+ setups</strong> on your timeframe using bar-replay, bar by bar — no hindsight scrolling, no peeking.</li>
+<li><strong>Log every trade:</strong> date, session, grade (A+/B/C), entry model, planned RR, achieved RR, screenshot, and one sentence on execution quality.</li>
+<li><strong>Compute after every 50 trades:</strong> win rate, average RR, and <code>Expectancy = (Win% × AvgWin) − (Loss% × AvgLoss)</code>.</li>
+</ol>
+<h3>22.2 What the Numbers Must Show</h3>
+<ul>
+<li>A+ setups must show a <em>visible</em> edge vs C setups. If not, your grading is decoration — recalibrate the layers.</li>
+<li>Expectancy must be positive <em>after</em> assumed costs (spread/commission/slippage).</li>
+<li>Below 100 trades, nothing is proven. Below 30, even less. Respect sample size.</li>
+</ul>
+<h3>22.3 The Journal as a Feedback Loop</h3>
+<p>The weekly ritual: classify every trade as a <strong>model loss</strong> (valid setup, correct execution, bad outcome) or an <strong>error</strong> (skipped a layer, early entry, revenge trade, moved a stop). Model losses are business costs — they happen to everyone with an edge. Errors are your actual curriculum. Fix ONE error pattern per week; never overhaul everything at once.</p>
+<h3>22.4 From Backtest to Live</h3>
+<ol>
+<li>200+ backtested trades with positive expectancy →</li>
+<li>50 demo trades matching backtest execution →</li>
+<li>Live at 0.25–0.5% risk for the first 50 →</li>
+<li>Scale to standard risk only after live execution matches the backtest.</li>
+</ol>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>200+ replayed setups per model before live deployment.</li>
+<li>Expectancy after costs — not win rate — is the metric of truth.</li>
+<li>Model losses are costs; errors are the curriculum. Fix one pattern per week.</li>
+<li>Staged deployment: backtest → demo → micro-live → standard risk.</li>
+</ul></div>`,
+quiz:[
+ {q:"The metric that determines whether a strategy has edge:",o:["Win rate","Number of trades","Expectancy after costs","Largest win"],a:2,e:"Positive expectancy after costs is the only definition of edge."},
+ {q:"A perfectly executed losing A+ trade is:",o:["An error to fix","A model loss — a normal business cost","Proof the model is broken","A reason to switch models today"],a:1,e:"Valid setups lose; that's variance. Errors are what you fix."},
+ {q:"How many replayed setups before going live?",o:["10","30","200+","It doesn't matter"],a:2,e:"Sample size is what separates data from anecdotes."}
+]},
+/* ============ LESSON 23 ============ */
+{id:23,phase:5,title:"Trading Psychology for SMC Traders",short:"The five SMC-specific failure patterns and the systems that defeat them",
+body:`
+${mentor("SMC has unique psychological traps because its logic looks obvious in hindsight. I've watched skilled analysts destroy themselves with these five patterns. Systems beat willpower — every time.")}
+<h3>23.1 The Five Failure Patterns</h3>
+<ol>
+<li><strong>FOMO on missed sweeps:</strong> price swept and ran without you → chasing the displacement at terrible RR. Truth: the market presents another sweep, always. Missing a trade costs nothing; chasing one costs 1%.</li>
+<li><strong>Revenge after being swept:</strong> your stop was harvested (that's the game) and the emotional response is instant re-entry at doubled size — feeding exactly the next pool.</li>
+<li><strong>Narrative marriage:</strong> holding a bias after invalidation because "the analysis was right." The market doesn't grade your analysis; it grades your invalidation.</li>
+<li><strong>Overtrading kill zones:</strong> treating every internal CHoCH as a setup. The scorecard exists precisely to filter this impulse.</li>
+<li><strong>Hindsight distortion:</strong> reviewing charts and believing "I'd have caught that." You wouldn't have — real time is ambiguous. This illusion corrupts journaling and inflates perceived skill.</li>
+</ol>
+<h3>23.2 The Systems (Not Willpower) That Defeat Them</h3>
+<ul>
+<li><strong>Pre-commitment:</strong> plan the day's trades before the kill zone; no new theses mid-session.</li>
+<li><strong>Trade caps:</strong> max 2–3 setups/day. After the cap, the platform closes.</li>
+<li><strong>The 30-minute rule:</strong> any trade taken within 30 minutes of a loss is auto-flagged as an error in the journal.</li>
+<li><strong>Identity framing:</strong> you are paid to execute the process, not to be right. Judge each week on checklist adherence, not P&L.</li>
+<li><strong>Separation ritual:</strong> after any loss, stand up, leave the desk 5 minutes. The pause breaks the emotional chain.</li>
+</ul>
+<h3>23.3 The Variance Reframe</h3>
+<p>With a genuine edge, any 20-trade window can look terrible while the 200-trade expectancy is intact. Your job is to make the 200-trade outcome happen by never deviating — variance is the price of admission, not a verdict on you.</p>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>SMC's five traps: chase-FOMO, revenge, narrative marriage, overtrading, hindsight bias.</li>
+<li>Defeat them with systems: caps, pre-commitment, journal flags, rituals.</li>
+<li>Judge process, not P&L; variance is admission price, not verdict.</li>
+</ul></div>`,
+quiz:[
+ {q:"Your stop is swept and price runs your original direction. Correct response:",o:["Chase immediately with bigger size","Log it as variance; wait for the next valid setup","Reverse and short","Quit for the week"],a:1,e:"Chasing missed sweeps is a documented negative-EV pattern."},
+ {q:"Judging yourself on weekly P&L rather than process adherence:",o:["Is motivating and correct","Corrupts decision-making and enables rule-breaking","Improves expectancy","Doesn't matter"],a:1,e:"Short-sample P&L is noise; process is what you control."},
+ {q:"The systems approach to psychology means:",o:["Trying harder","Mechanical caps, pre-commitment and journal flags that don't rely on willpower","Meditating during trades","Ignoring emotions entirely"],a:1,e:"Systems operate when willpower fails — that's their entire purpose."}
+]},
+/* ============ LESSON 24 ============ */
+{id:24,phase:5,title:"The Complete Professional Trading Plan",short:"Everything assembled into one executable document",
+body:`
+${mentor("Everything you've learned compresses into this one-page plan. This is the deliverable of the entire course — print it, sign it, execute it for 90 days without improvising.")}
+<h3>THE GILBERT RONOH MASTER PLAN</h3>
+<div class="callout"><b>1. Markets & Times</b>2–3 correlated instruments max. Trade only London (02:00–05:00 NY) and NY (07:00–10:00) kill zones.<br><br>
+<b>2. Daily Pre-Market (20 min)</b>① Mark weekly/daily liquidity pools. ② State the draw on liquidity. ③ Mark HTF POIs with the scorecard. ④ Mark inducement in front of each POI. ⑤ Write the narrative + invalidation.<br><br>
+<b>3. Setup Criteria (A+ = all true)</b>HTF bias aligned · POI score ≥ 7 · sweep of inducement/liquidity · LTF MSS with displacement · entry at FVG-CE or OB∩FVG · inside a kill zone · in discount (long) / premium (short).<br><br>
+<b>4. Execution</b>A+ zones → limit entry at CE. B zones → confirmation entry. Stop = beyond structural invalidation + wick buffer. Size = 1% (A+) / 0.5% (B).<br><br>
+<b>5. Management</b>TP1 = nearest opposing liquidity (50% off + BE). TP2 = the HTF draw. Trail remainder via LTF structure. Exit early on counter-structure breaks.<br><br>
+<b>6. Risk Protocol</b>Max 3 trades/day. −3% weekly → half size. −5% → quarter. −8% → demo only. Correlated positions = one bet.<br><br>
+<b>7. Review</b>Nightly: grade execution, not outcomes. Weekly: expectancy update every 50 trades; fix ONE error pattern.</div>
+<div class="keybox"><b>This plan is complete.</b>Every line maps to a lesson. Execute it for 90 days without improvising and you have crossed from learner to professional operator. The plan is the system; you are the executor — nothing more, nothing less.</div>`,
+quiz:[
+ {q:"The plan's setup criteria require all of the following EXCEPT:",o:["HTF bias alignment","Kill-zone timing","A random entry whenever price 'looks good'","Sweep + MSS confluence"],a:2,e:"Every layer is defined; improvisation is exactly what the plan exists to defeat."}
+]},
+/* ============ LESSON 25 ============ */
+{id:25,phase:5,title:"Case Studies — Winners & Failures",short:"Full walkthroughs, including why setups fail",
+body:`
+${mentor("Final applied lesson. Each case walks the exact checklist. Pair these with your own chart replays — recognition under real-time ambiguity is the last skill, and it only comes from repetition.")}
+<h3>Case 1 — The Textbook A+ Long</h3>
+<p>Daily bullish; draw = last week's high. 4H discount retracement sweeps the previous day's low at an unmitigated 4H OB (score 9). 15m sweeps the inducement low at 03:15 London, displaces up leaving an FVG, MSS confirmed. Limit at FVG-CE, stop below the sweep wick, 1%. TP1 at 4H equilibrium (50% off, BE), TP2 at the weekly high. <strong>Teaching point:</strong> the sweep wick holding is the tell — the fill zone defends itself.</p>
+<h3>Case 2 — The Failed Setup (and Why)</h3>
+<p>Same structure, but the "sweep" candle <em>closes</em> below the low instead of wicking. Displacement is slow and overlapping. The OB sits in premium of the 4H range. <strong>Diagnosis:</strong> two layers absent (true sweep + displacement) → C-grade. The correct action was no action. Most "failed setups" were never setups.</p>
+<h3>Case 3 — The Reversal via Breaker</h3>
+<p>Uptrend; price sweeps an old high (BSL) then displaces down through the last significant HL — MSS with FVG. The OB that failed mid-leg becomes a breaker; the 5m retest rejects sharply. Short at the breaker, stop above the breaker's origin high, target = the SSL below. <strong>Teaching point:</strong> failed OBs are elite because trapped participants become forced fuel.</p>
+<h3>Case 4 — The Judas Trap</h3>
+<p>London open spikes down through Asian lows — retail shorts pile in. Price reclaims the Asian low within 8 minutes, displaces up, 5m MSS, FVG entry long. Target: Asian high, then the daily draw. <strong>Teaching point:</strong> the AMD script made this trade predictable <em>before</em> it happened.</p>
+<h3>Case 5 — The Sweep That Failed (Humility Case)</h3>
+<p>A textbook sweep forms, MSS prints, entry taken — then the sweep low breaks anyway and the stop is hit. Review: the sweep occurred mid-range with no HTF POI — location layer was missing. <strong>Teaching point:</strong> even perfect execution of a B-grade idea loses. Grade first, always.</p>
+<div class="keybox"><b>Course Complete</b>You now hold the full framework: structure → liquidity → zones → time → narrative → confluence → execution → risk → psychology. The remaining 20% — pattern recognition under real-time ambiguity — comes only from the 200-trade protocol (Lesson 22). Begin it today.</div>`,
+quiz:[
+ {q:"In Case 2, the setup failed primarily because:",o:["The market was closed","It was C-grade: no true sweep, no displacement, wrong location","The stop was too tight","The OB was too old"],a:1,e:"Most failures were never valid setups — grading before entry is the defense."},
+ {q:"Breaker blocks are strong because:",o:["They're HTF only","Trapped participants become forced fuel on the retest","They're FVGs in disguise","Round numbers align"],a:1,e:"Trapped positions must unwind — reliable reaction pressure."},
+ {q:"Case 5's lesson is:",o:["Stops don't work","Even perfect execution of a B-grade idea loses — grade first","Sweeps always fail","Never trade again"],a:1,e:"Execution quality and setup grade are separate axes — both must be right."}
+]},
+/* ============ LESSON 26 ============ */
+{id:26,phase:5,title:"The Professional's Path Forward",short:"Your 90-day operating schedule and lifelong improvement loop",
+body:`
+${mentor("You've finished the curriculum. Now I'll tell you exactly what the next 90 days look like — because knowledge without an operating schedule is entertainment.")}
+<h3>26.1 The 90-Day Operating Schedule</h3>
+<table><tr><th>Days</th><th>Focus</th><th>Deliverable</th></tr>
+<tr><td>1–14</td><td>Re-read Phases 1–3; drill all 15 drills</td><td>Drill log with your personal statistics</td></tr>
+<tr><td>15–30</td><td>Backtest Model A — 100 setups minimum</td><td>Journal with expectancy tracking</td></tr>
+<tr><td>31–45</td><td>Complete 200+ backtested setups; grade calibration</td><td>A+ vs C edge comparison proven in YOUR data</td></tr>
+<tr><td>46–60</td><td>Demo trading the Master Plan, 0-size, full process</td><td>50 demo trades matching backtest execution</td></tr>
+<tr><td>61–90</td><td>Live at reduced risk (0.25–0.5%)</td><td>Live expectancy within range of backtest</td></tr>
+<tr><td>Day 91+</td><td>Standard risk. The plan is law.</td><td>The professional operation begins</td></tr></table>
+<h3>26.2 The Lifelong Improvement Loop</h3>
+<ol>
+<li><strong>Measure</strong> — expectancy every 50 trades, forever.</li>
+<li><strong>Diagnose</strong> — model loss or error? Which layer failed?</li>
+<li><strong>Adjust one variable</strong> — never overhaul; one change, then re-measure.</li>
+<li><strong>Repeat</strong> — the loop never ends. This IS the professional career.</li>
+</ol>
+<h3>26.3 What Mastery Actually Looks Like</h3>
+<ul>
+<li>You feel nothing when a setup loses and nothing when it wins — process runs both.</li>
+<li>You skip more trades than you take, comfortably.</li>
+<li>Your worst weeks no longer threaten your account mathematically.</li>
+<li>You can explain every rule in this course to a beginner in your own words — the final proof of understanding.</li>
+</ul>
+<div class="callout"><b>Gilbert's Final Word</b>The market will test every concept in this course, in real time, with real money on the line. When it does, remember: you are not paid to predict — you are paid to execute a process with a positive expectancy, patiently, for years. Trade the process, not the prediction. Now go build your sample size.</div>
+<div class="keybox"><b>Key Takeaways</b><ul>
+<li>90-day schedule: drills → backtest → demo → reduced-risk live → standard.</li>
+<li>The improvement loop never ends: measure → diagnose → adjust one variable → repeat.</li>
+<li>Mastery = process neutrality, selectivity, and survival by design.</li>
+</ul></div>`,
+quiz:[
+ {q:"The first 14 days of the 90-day schedule focus on:",o:["Live trading maximum size","Re-reading Phases 1–3 and completing all drills","Demo only","Quitting social media"],a:1,e:"Foundations are re-forged through drills before any data collection."},
+ {q:"The improvement loop adjusts:",o:["Everything at once","One variable at a time, then re-measures","Nothing ever","Only the risk"],a:1,e:"One change + re-measurement is the only way to know what caused improvement."},
+ {q:"A trader who feels nothing at a loss and nothing at a win is:",o:["Emotionally dead","Executing process — the mark of professional neutrality","Lucky","Not paying attention"],a:1,e:"Neutrality comes from trust in measured expectancy, not from indifference."}
+]},
+];
+
+/* ============================================================
+   ENGINE
+============================================================ */
+const state={done:JSON.parse(localStorage.getItem("ga_done")||"[]")};
+let currentId=1, quizPassed=false;
+
+function save(){localStorage.setItem("ga_done",JSON.stringify(state.done))}
+function lessonById(id){return LESSONS.find(l=>l.id===id)}
+function isUnlocked(id){return id===1||state.done.includes(id-1)}
+
+function renderCurriculum(){
+  const box=document.getElementById("curriculumList");box.innerHTML="";
+  PHASES.forEach(ph=>{
+    const h=document.createElement("h2");h.textContent=ph.name;
+    const s=document.createElement("div");s.className="phaseSub";s.textContent=ph.sub;
+    box.appendChild(h);box.appendChild(s);
+    ph.ids.forEach(id=>{
+      const l=lessonById(id);
+      const cls=state.done.includes(id)?"done":(!isUnlocked(id)?"locked":"");
+      const badge=state.done.includes(id)?"✓":(isUnlocked(id)?"○":"🔒");
+      const d=document.createElement("div");d.className="lessonCard "+cls;
+      d.innerHTML=`<span class="badge">${badge}</span><span class="num">${String(id).padStart(2,"0")}</span><span class="t">${l.title}<small>${l.short}</small></span>`;
+      if(isUnlocked(id))d.onclick=()=>openLesson(id);
+      box.appendChild(d);
+    });
+  });
+  const pct=Math.round(state.done.length/LESSONS.length*100);
+  document.getElementById("progressPill").textContent=`${state.done.length}/${LESSONS.length}`;
+  document.getElementById("progressBar").style.width=pct+"%";
+}
+
+function openLesson(id){
+  currentId=id;quizPassed=false;
+  const l=lessonById(id);
+  document.getElementById("crumb").textContent=`Phase ${l.phase+1} · Lesson ${id} of ${LESSONS.length}`;
+  document.getElementById("lessonTitle").textContent=l.title;
+  document.getElementById("lessonBody").innerHTML=l.body;
+  renderQuiz(l);
+  const done=state.done.includes(id);
+  const btn=document.getElementById("completeBtn");
+  btn.disabled=!quizPassed&&!done;
+  btn.textContent=done?"Completed ✓":"Mark as Complete";
+  btn.classList.toggle("done",done);
+  document.getElementById("prevBtn").disabled=id===1;
+  document.getElementById("nextBtn").disabled=id===LESSONS.length;
+  showView("lesson");
+  window.scrollTo(0,0);
+}
+
+function renderQuiz(l){
+  const box=document.getElementById("quizBox");
+  box.innerHTML=`<h3>Mastery Check — pass to unlock completion</h3>`+
+   l.quiz.map((q,i)=>`<div class="q" data-i="${i}"><p>${i+1}. ${q.q}</p>${
+     q.o.map((o,j)=>`<label data-j="${j}" onclick="answer(this,${i},${j})">${o}<div class="exp">${q.e}</div></label>`).join("")
+   }</div>`).join("");
+   box.querySelectorAll(".q").forEach(q=>{q.dataset.attempts="0";delete q.dataset.picked;delete q.dataset.answered;});
+  const r=document.getElementById("quizResult");r.textContent="";r.className="";
+}
+
+function answer(el,qi,ji){
+  const q=document.querySelectorAll(".q")[qi];
+  if(q.dataset.answered)return;
+  const l=lessonById(currentId), correct=l.quiz[qi].a;
+
+  if(ji===correct){
+    /* RIGHT: lock question, show green + explanation */
+    q.dataset.answered="1";
+    q.dataset.picked=ji;
+    el.classList.add("correct");
+    el.querySelector(".exp").classList.add("show");
+    checkQuiz();
+  }else{
+    /* WRONG: show WRONG badge only — never reveal the correct answer */
+    const attempts=(+q.dataset.attempts||0)+1;
+    q.dataset.attempts=attempts;
+
+    /* badge element inside the question */
+    let badge=q.querySelector(".wrongBadge");
+    if(!badge){badge=document.createElement("div");badge.className="wrongBadge";q.insertBefore(badge,q.firstChild);}
+    badge.textContent=`✗ WRONG — attempt ${attempts} of 3`;
+    badge.classList.add("show");
+    setTimeout(()=>badge.classList.remove("show"),1400);
+
+    el.classList.add("wrong");
+    setTimeout(()=>el.classList.remove("wrong"),900);
+
+    if(attempts>=3){
+      /* 3 WRONG ATTEMPTS: whole quiz resets — must re-read and start over */
+      const res=document.getElementById("quizResult");
+      res.textContent="✗ 3 wrong attempts — quiz locked. Re-read the lesson, then the quiz will reset for a fresh attempt.";
+      res.className="fail";
+      document.querySelectorAll(".q label").forEach(lb=>{lb.style.pointerEvents="none";lb.style.opacity=".5";});
+      setTimeout(()=>{
+        renderQuiz(lessonById(currentId));
+        const r2=document.getElementById("quizResult");
+        r2.textContent="Quiz reset — fresh attempt. Take your time and re-read before answering.";
+        r2.className="";
+      },2500);
+    }
+  }
+}
+
+function checkQuiz(){
+  const qs=document.querySelectorAll(".q");
+  if(![...qs].every(q=>q.dataset.answered))return;
+  let score=0;
+  qs.forEach(q=>{
+    const picked=q.dataset.picked!==undefined?+q.dataset.picked:null;
+    const correct=lessonById(currentId).quiz[+q.dataset.i].a;
+    if(picked===correct)score++;
+  });
+  const res=document.getElementById("quizResult");
+  if(score===qs.length){
+    res.textContent=`${score}/${qs.length} — PASSED. You may mark this lesson complete.`;
+    res.className="pass";quizPassed=true;
+    document.getElementById("completeBtn").disabled=false;
+  }else{
+    res.textContent=`${score}/${qs.length} — review the explanations and retake.`;
+    res.className="fail";
+    setTimeout(()=>renderQuiz(lessonById(currentId)),1200);
+  }
+}
+
+document.getElementById("completeBtn").onclick=function(){
+  if(!state.done.includes(currentId))state.done.push(currentId);
+  save();this.classList.add("done");this.textContent="Completed ✓";this.disabled=true;
+  renderCurriculum();updateContinue();
+};
+document.getElementById("prevBtn").onclick=()=>openLesson(currentId-1);
+document.getElementById("nextBtn").onclick=()=>openLesson(currentId+1);
+
+function showView(v){
+  ["homeView","curriculumView","aboutView","glossaryView"].forEach(id=>document.getElementById(id).classList.remove("on"));
+  document.getElementById("lessonView").classList.remove("on");
+  if(v==="lesson")document.getElementById("lessonView").classList.add("on");
+  else document.getElementById({home:"homeView",curriculum:"curriculumView",about:"aboutView",glossary:"glossaryView"}[v]).classList.add("on");
+  document.querySelectorAll(".navlinks a").forEach(a=>{
+    a.classList.toggle("active",a.dataset.nav===v||(v==="lesson"&&a.dataset.nav==="curriculum"));
+  });
+  if(v!=="lesson")window.scrollTo(0,0);
+}
+function go(v){renderCurriculum();showView(v)}
+function resume(){
+  const next=LESSONS.find(l=>!state.done.includes(l.id));
+  openLesson(next?next.id:LESSONS.length);
+}
+function updateContinue(){
+  const next=LESSONS.find(l=>!state.done.includes(l.id));
+  const link=document.getElementById("continueLink");
+  link.style.display=next?"inline":"none";
+  if(next)link.onclick=(e)=>{e.preventDefault();openLesson(next.id)};
+}
+document.querySelectorAll(".navlinks a").forEach(a=>{
+  if(a.dataset.nav==="continue")return;
+  a.onclick=(e)=>{e.preventDefault();go(a.dataset.nav)};
+});
+
+function renderGloss(){
+  document.getElementById("glossList").innerHTML=GLOSSARY.map(g=>
+   `<div class="gTerm"><b>${g[0]}</b><p>${g[1]}</p></div>`).join("");
+}
+function filterGloss(){
+  const v=document.getElementById("glossSearch").value.toLowerCase();
+  document.querySelectorAll(".gTerm").forEach(t=>{
+    t.style.display=t.textContent.toLowerCase().includes(v)?"block":"none";
+  });
+}
+
+renderCurriculum();renderGloss();updateContinue();
+</script>
+</body>
+</html>
